@@ -1,0 +1,38 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd"
+xmlns:lv="nativescript-telerik-ui/listview"
+xmlns:nsDrawer="nativescript-telerik-ui/sidedrawer"
+xmlns:sideBar="shared/components/side-bar-content"
+xmlns:actionBar="shared/components/action-bar"
+xmlns:i="nativescript-image-cache-it"
+actionBarHidden="true"
+navigatingTo="onNavigatingTo" loaded="onLoaded">
+    <nsDrawer:RadSideDrawer id="sideBar" drawerContentSize="{{screenWidth*0.85}}">
+        <nsDrawer:RadSideDrawer.drawerTransition>
+            <nsDrawer:PushTransition/>
+        </nsDrawer:RadSideDrawer.drawerTransition>
+        <nsDrawer:RadSideDrawer.drawerContent>
+            <sideBar:side-bar-content />
+        </nsDrawer:RadSideDrawer.drawerContent>
+        <nsDrawer:RadSideDrawer.mainContent>
+            <GridLayout rows="auto,*" columns="*" height="100%" width="100%" orientation="vertical">
+            <i:ImageCacheIt rowSpan="2" stretch="aspectFill" col="0" imageUri="{{ categoryInfo.categoryImage ? categoryInfo.categoryImage : 'res://background_shelf' }}"/>
+                <actionBar:action-bar row="0" id="actionBar"></actionBar:action-bar>
+                <GridLayout rows="auto, *, auto" columns="*" row="1" backgroundColor="rgba(0,0,0,0.4)">
+                    <StackLayout row="0" height="70" width="100%" verticalAlignment="center" horizontalAlignment="center">
+
+                    </StackLayout>
+                    <ListView backgroundColor="transparent" row="1" class="list-view" id="listView" items="{{ dataItems }}" loaded="onLoadedListView" itemTap="{{ tapSubCategoryItem }}" itemLoading="{{ onItemLoading }}" >
+                        <ListView.itemTemplate>
+                            <StackLayout marginTop="{{ index==0 ? 10 : 0 }}" idSubCategory="{{ subCategoryId }}" nameSubCategory="{{ subCategoryName }}" backgroundColor="white" marginRight="20" marginBottom="10" marginLeft="20" style="border-radius: 5;">
+                                <Label text="{{ subCategoryName }}" fontSize="14" height="60" color="#EC0677" style="text-align: center"/>
+                            </StackLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+                    <StackLayout row="2" height="70" width="100%" verticalAlignment="center" horizontalAlignment="center">
+
+                    </StackLayout>
+                </GridLayout>
+            </GridLayout>
+        </nsDrawer:RadSideDrawer.mainContent>
+    </nsDrawer:RadSideDrawer>
+</Page>

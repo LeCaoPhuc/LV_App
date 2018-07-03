@@ -1,0 +1,11 @@
+.input-layout{
+    padding: 10;
+}
+.content-feedback {
+    border-width: 1;
+    border-color : #ccc;
+}
+.content-feedback-error {
+    border-width: 1;
+    border-color : red;
+}

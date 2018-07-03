@@ -1,0 +1,30 @@
+<GridLayout rows="50" columns="40,*,40" class="action-bar" loaded="onLoaded" xmlns:i="nativescript-image-cache-it">
+    <StackLayout height="40" width="40" id="menuLeftMenu" col="0" style="text-align: center" verticalAlignment="middle" tap="{{ openSideBar }}" visibility="{{ displayActionBar.actionBarStyle!=4 ? 'visible' : 'collapsed' }}">
+          <i:ImageCacheIt stretch="fill"  imageUri="res://icon_user"/> 
+    </StackLayout>
+
+    <StackLayout col="1" verticalAlignment="middle"  width="100%">
+            <StackLayout height="100%"  orientation="horizontal" id="isHome" style="text-align: center; vertical-align: bottom" width="100%" horizontalAlignment="center" visibility="{{ displayActionBar.actionBarStyle==1 ? 'visible' : 'collapse' }}">
+                <Label text="HANDMADE" textWrap="true"  class="quick-sand" verticalAlignment="middle"   fontSize="25"/>
+            </StackLayout>
+
+            <StackLayout id="isCategory" visibility="{{ displayActionBar.actionBarStyle==2 ? 'visible' : 'collapsed' }}" color="white"  
+                tap="{{ onTapMenuHome }}" 
+                orientation="horizontal" 
+                horizontalAlignment="center" 
+                paddingRight="5">
+                <StackLayout width="40" verticalAlignment="middle">
+                    <Label id="menuHome" text="&#xf0c9;" fontSize="18" class="fa" width="40" style="text-align: center;"  verticalAlignment="middle" textWrap="true"/>
+                </StackLayout>
+                <StackLayout orientation="horizontal">
+                    <Label id="titleActionBarStyle" text="{{ displayActionBar.titleActionBar }}"  fontSize="18" loaded="onTitleCreatingView"/>
+                </StackLayout>
+            </StackLayout>  
+    </StackLayout> 
+     <StackLayout col="0" colSpan="3" id="isOptional"  visibility="{{ displayActionBar.actionBarStyle==4 ? 'visible' : 'collapsed' }}">
+        <SearchBar id="searchBar" hint="Search" color="#000000" text="" clear="onClear" submit="{{ onSubmit }}" backgroundColor="white" borderRadius="5" marginTop="10"/>
+    </StackLayout> 
+    <StackLayout height="40" width="40" id="menuSearch" col="2" style="text-align: center" verticalAlignment="middle" tap="onSearchTap" visibility="{{ displayActionBar.actionBarStyle!=4 ? 'visible' : 'collapsed' }}">
+          <i:ImageCacheIt stretch="fill"  imageUri="res://icon_search"/> 
+    </StackLayout>
+</GridLayout>

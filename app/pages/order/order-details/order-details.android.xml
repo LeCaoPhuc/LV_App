@@ -1,0 +1,76 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:cart="shared/components/cart" xmlns:i="nativescript-image-cache-it"
+ xmlns:lv="nativescript-telerik-ui/listview" xmlns:product="shared/components/product-item" navigatingTo="navigatingTo" class="page"
+ loaded="onLoaded" actionBarHidden="true" xmlns:actionBar="shared/components/action-bar-back">
+	<GridLayout id="productListLayout">
+		<StackLayout>
+			<actionBar:action-bar-back id="actionBar"></actionBar:action-bar-back>
+			<TabView tabBackgroundColor="#3F4050" selectedTabTextColor="white" androidSelectedTabHighlightColor="white">
+				<TabView.items>
+					<TabViewItem title="Thông tin đơn hàng">
+						<TabViewItem.view>
+							<GridLayout rows="auto, auto, auto" columns="*,auto" class="p-x-20 m-t-10 content">
+								<Label text="0" col="0" text="{{'Đơn hàng số ' + orderDetail.orderNumber}}" textWrap="true" textWrap="true" fontSize="17"
+								 class="m-y-10"></Label>
+								<StackLayout row="1" col="0" marginBottom="10">
+									<Label text="Trạng thái đơn hàng:" textWrap="true" color="#999" paddingTop="3" marginBottom="20"></Label>
+									<Label text="Tên khách hàng:" textWrap="true" color="#999" paddingTop="3"></Label>
+									<Label text="Email:" textWrap="true" color="#999" paddingTop="3"></Label>
+									<Label text="Số điện thoại:" textWrap="true" color="#999" paddingTop="3"></Label>
+								</StackLayout>
+								<StackLayout row="1" col="1" marginBottom="10">
+									<Label text="{{ orderDetail.deliveryStatus }}" textWrap="true" color="{{ orderDetail.deliveryStatus == 'Hoàn thành' ? '#009688' : '#424242'}}"
+									 horizontalAlignment="right" marginBottom="20"></Label>
+									<Label text="{{ orderDetail.customerName  }}" textWrap="true" class="text-right" color="#009688" horizontalAlignment="right"></Label>
+									<Label text="{{ orderDetail.email }}" textWrap="true" class="text-right" color="#009688" horizontalAlignment="right"></Label>
+									<Label text="{{ orderDetail.phoneNumber}}" textWrap="true" class="text-right" color="#009688" horizontalAlignment="right"></Label>
+								</StackLayout>
+								<StackLayout row="2" col="0">
+									<Label text="Tạm tính:" textWrap="true" color="#999" paddingTop="3"></Label>
+									<Label text="Phí giao hàng:" textWrap="true" color="#999" paddingTop="3"></Label>
+									<Label text="Thành tiền: " textWrap="true" marginTop="20" color="#812092" paddingTop="3"></Label>
+								</StackLayout>
+								<StackLayout row="2" col="1" class="right-column">
+									<Label text="{{ orderDetail.totalPrice ? orderDetail.totalPrice + 'đ' : '-' }}" textWrap="true" class="text-right" color="#812092"
+									 horizontalAlignment="right"></Label>
+									<Label text="Miễn Phí" textWrap="true" horizontalAlignment="right"></Label>
+									<Label text="{{ orderDetail.totalPrice ? orderDetail.totalPrice + 'đ' : '-' }}" textWrap="true" class="text-right" color="#812092"
+									 fontSize="20" marginTop="20" horizontalAlignment="right"></Label>
+
+								</StackLayout>
+							</GridLayout>
+						</TabViewItem.view>
+					</TabViewItem>
+					<TabViewItem title="Sản phẩm">
+						<TabViewItem.view>
+							<lv:RadListView row="0" dock="top" items="{{ listProduct }}" id="lv">
+								<lv:RadListView.itemTemplate>
+									<GridLayout rows="*" columns="*" backgroundColor="white">
+										<GridLayout row="0" col="0" rows="auto, auto, auto" columns="*, 3*" style="z-index: 100;border-bottom-width: 1; border-color: #e6e6e6"
+										 class="p-y-5">
+											<StackLayout row="0" rowSpan="3" col="0" class="p-x-10" width="100" height="100" tap="onProductTap" verticalAlignment="center">
+												<i:ImageCacheIt stretch="aspectFit" imageUri="{{productImageList[0] ? productImageList[0] : '' }}" />
+											</StackLayout>
+											<GridLayout row="0" col="1" colSpan="2" rows="*" columns="*, auto">
+												<Label row="0" col="0" text="{{productName}}" verticalAlignment="center" fontSize="16" textWrap="true" class="raleway m-t-5"
+												 color="#888"></Label>
+											</GridLayout>
+											<StackLayout row="1" col="1" colSpan="2" orientation="horizontal">
+												<Label color="#812092" class="raleway" textWrap="true">
+													<FormattedString>
+														<Span text="{{isFresh ? quantity + 'kg' + ' x ' : quantity + ' x '}}" fontSize="17" fontWeight="Bold"></Span>
+														<Span text="{{productFinalPriceDisplay ? productFinalPriceDisplay : ' - '}}" fontSize="17" fontWeight="Bold"></Span>
+														<Span text="đ" fontSize="15"></Span>
+													</FormattedString>
+												</Label>
+											</StackLayout>
+										</GridLayout>
+									</GridLayout>
+								</lv:RadListView.itemTemplate>
+							</lv:RadListView>
+						</TabViewItem.view>
+					</TabViewItem>
+				</TabView.items>
+			</TabView>
+		</StackLayout>
+	</GridLayout>
+</Page>

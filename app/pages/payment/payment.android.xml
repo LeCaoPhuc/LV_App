@@ -1,0 +1,160 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded" actionBarHidden="true" navigatingTo="navigatingTo"
+    xmlns:actionBar="shared/components/action-bar-back" xmlns:dd="nativescript-drop-down">
+
+    <StackLayout backgroundColor="white" tap="{{onOutSideTap}}">
+        <actionBar:action-bar-back id="actionBar"></actionBar:action-bar-back>
+        <GridLayout id="stepBar" rows="auto,auto" columns="*,*,*,*,*,*,*,*,*,*,*,*" class="step-bar" visibility="{{indexScreenShow != 4 ? 'visible' : 'collapsed'}}">
+
+            <StackLayout row="0" col="1" colSpan="5" style="border-top-width: 2" verticalAlignment="center" class="m-x-10" borderColor="{{ (indexScreenShow >= 2) ? '#ea2e49' : '#812092' }}"></StackLayout>
+            <StackLayout row="0" col="6" colSpan="5" style="border-top-width: 2" verticalAlignment="center" class="m-x-10" borderColor="{{ (indexScreenShow >= 3) ? '#ea2e49' : '#812092' }}"></StackLayout>
+
+            <Label row="0" col="0" colSpan="3" text="1" backgroundColor="#ea2e49" class="label-number-top"></Label>
+            <Label row="0" col="3" colSpan="6" text="2" backgroundColor="{{ (indexScreenShow >= 2) ? '#ea2e49' : '#812092' }}" class="label-number-top"></Label>
+            <Label row="0" col="9" colSpan="3" text="3" backgroundColor="{{ (indexScreenShow >= 3) ? '#ea2e49' : '#812092' }}" class="label-number-top"
+                paddingBottom="2"></Label>
+
+            <Label row="1" col="0" colSpan="3" text="Địa chỉ" color="#ea2e49" textWrap="true" class="label-top"></Label>
+            <Label row="1" col="3" colSpan="6" text="Thanh toán" color="{{ (indexScreenShow >= 2) ? '#ea2e49' : '#812092' }}" textWrap="true"
+                class="label-top"></Label>
+            <Label row="1" col="9" colSpan="3" text="Xác nhận" color="{{ (indexScreenShow >= 3) ? '#ea2e49' : '#812092' }}" textWrap="true"
+                class="label-top"></Label>
+
+        </GridLayout>
+        <ScrollView loaded="onScrollViewLoaded" marginRight="10" marginLeft="10" visibility="{{indexScreenShow == 1 ? 'visible' : 'collapsed'}}" id="screen-1">
+            <StackLayout>
+                <StackLayout orientation="horizontal" class="text-title">
+                    <StackLayout width="20">
+                        <Label text="&#xf2bc;" textWrap="true" class="fa text-center"></Label>
+                    </StackLayout>
+                    <Label text="  Thông tin khách hàng" textWrap="true"></Label>
+                </StackLayout>
+
+                <StackLayout class="m-x-10">
+                    <Label text="Họ và tên: " textWrap="true" class="label-input"></Label>
+                    <TextField id="{{infoConfig.name.id}}" hint="{{infoConfig.name.placeHolder}}" text="{{infoConfig.name.value}}" class="{{infoConfig.name.messageError != ' ' ? 'input-border-error' : 'input-border' }}"
+                        blur="{{validateInput}}"></TextField>
+                    <Label text="{{infoConfig.name.messageError}}" textWrap="true" class="text-error"></Label>
+
+                    <Label text="Email: " textWrap="true" class="label-input"></Label>
+                    <TextField id="{{infoConfig.email.id}}" hint="{{infoConfig.email.placeHolder}}" text="{{infoConfig.email.value}}" class="{{infoConfig.email.messageError != ' ' ? 'input-border-error' : 'input-border' }}"
+                        blur="{{validateInput}}" keyboardType="email"></TextField>
+                    <Label text="{{infoConfig.email.messageError}}" textWrap="true" class="text-error"></Label>
+
+                    <Label text="Số điện thoại: " textWrap="true" class="label-input"></Label>
+                    <TextField id="{{infoConfig.phoneNumber.id}}" hint="{{infoConfig.phoneNumber.placeHolder}}" text="{{infoConfig.phoneNumber.value}}"
+                        class="{{infoConfig.phoneNumber.messageError != ' ' ? 'input-border-error' : 'input-border' }}" blur="{{validateInput}}"
+                        keyboardType="phone"></TextField>
+                    <Label text="{{infoConfig.phoneNumber.messageError}}" textWrap="true" class="text-error"></Label>
+                </StackLayout>
+
+                <StackLayout orientation="horizontal" class="text-title m-b-5">
+                    <StackLayout width="20">
+                        <Label text="&#xf041;" textWrap="true" class="fa text-center"></Label>
+                    </StackLayout>
+                    <Label text="  Địa chỉ giao hàng" textWrap="true"></Label>
+                </StackLayout>
+
+                <StackLayout class="m-x-10">
+                    <StackLayout class="drop-down-border">
+                        <dd:DropDown id="dropDownCity" items="{{cityList}}" hint="-- Tỉnh/Thành Phố --" class="drop-down" selectedIndexChanged="{{dropDownCityListChanged}}"
+                        />
+                    </StackLayout>
+                    <StackLayout class="drop-down-border">
+                        <dd:DropDown id="dropDownDistrict" items="{{districtList}}" hint="-- Quận/Huyện --" class="drop-down" selectedIndexChanged="{{dropDownDistrictListChanged}}"
+                        />
+                    </StackLayout>
+                    <StackLayout class="drop-down-border">
+                        <dd:DropDown id="dropDownCommune" items="{{communeList}}" hint="-- Phường/Xã --" class="drop-down" />
+                    </StackLayout>
+                    <Label text="Địa chỉ nhận hàng (số nhà, đường): " textWrap="true" class="label-input" marginTop="15"></Label>
+                    <TextView id="{{infoConfig.street.id}}" hint="{{infoConfig.street.placeHolder}}" text="{{infoConfig.street.value}}" class="{{infoConfig.street.messageError != ' ' ? 'input-border-error' : 'input-border' }}"
+                        blur="{{validateInput}}" editable="true"></TextView>
+                    <Label text="{{infoConfig.street.messageError}}" textWrap="true" class="text-error"></Label>
+                </StackLayout>
+
+                <Button text="Tiếp tục" tap="{{onConfirmButtonTap}}" screenIndex="1" backgroundColor="#812092" color="white" class="m-t-20 m-b-10"></Button>
+
+            </StackLayout>
+        </ScrollView>
+        <ScrollView loaded="onScrollViewLoaded" marginRight="10" marginLeft="10" visibility="{{indexScreenShow == 2 ? 'visible' : 'collapsed'}}" id="screen-2">
+            <DockLayout stretchLastChild="true" height="100%">
+                <Button dock="bottom" text="Tiếp tục" tap="{{onConfirmButtonTap}}" screenIndex="2" backgroundColor="#812092" color="white"
+                    class="m-t-20 m-b-20" verticalAlignment="bottom"></Button>
+
+                <StackLayout dock="top">
+                    <StackLayout orientation="horizontal" class="text-title">
+                        <StackLayout width="20">
+                            <Label text="&#xf0d6;" textWrap="true" class="fa text-center"></Label>
+                        </StackLayout>
+                        <Label text="  Hình thức thanh toán" textWrap="true"></Label>
+                    </StackLayout>
+                    <FlexboxLayout justifyContent="space-around" class="m-b-20">
+                        <StackLayout paymentType="cod" width="45%" class="payment-type-box" tap="{{onChangePaymentTypeTap}}" borderColor="{{paymentType == 'cod' ? '#ea2e49' : '#ccc'}}">
+                            <Label text="{{ (paymentType == 'cod') ? '&#xf058;' : '&#xf1db;' }}" class="fa text-center m-b-5" color="{{paymentType == 'cod' ? '#ea2e49' : '#ccc'}}"
+                                fontSize="17" />
+                            <Label text="Thanh toán khi nhận hàng" textWrap="true" color="{{paymentType == 'cod' ? '#ea2e49' : '#ccc'}}" class="text-center"></Label>
+                        </StackLayout>
+                    </FlexboxLayout>
+                    <Label fontSize="15" text="Quý khách sẽ thanh toán khi nhận được hàng." textWrap="true" visibility="{{paymentType == 'cod' ? 'visible' : 'collapsed'}}"></Label>
+                </StackLayout>
+            </DockLayout>
+        </ScrollView>
+        <ScrollView loaded="onScrollViewLoaded" marginRight="10" marginLeft="10" visibility="{{indexScreenShow == 3 ? 'visible' : 'collapsed'}}" id="screen-3">
+            <DockLayout stretchLastChild="true" height="100%">
+                <Button dock="bottom" text="Đặt Hàng" tap="{{onConfirmButtonTap}}" screenIndex="3" backgroundColor="#812092" color="white"
+                    class="m-t-20 m-b-10"></Button>
+                <StackLayout dock="top">
+                    <StackLayout orientation="horizontal" class="text-title">
+                        <StackLayout width="20">
+                            <Label text="&#xf2bb;" textWrap="true" class="fa text-center"></Label>
+                        </StackLayout>
+                        <Label text="  Địa chỉ giao hàng" textWrap="true"></Label>
+                    </StackLayout>
+                    <GridLayout rows="auto,auto,auto,auto" columns="*" class="order-info">
+                        <Label row="0" text="{{ 'Họ tên: '+address.name }}" textWrap="true"/>
+                        <Label row="1" text="{{'Địa chỉ: '+address.fullAddress }}" textWrap="true" />
+                        <Label row="2" text="{{ 'Số điện thoại: '+address.telephone}}" textWrap="true" />
+                        <Label row="3" text="{{ 'email: '+address.email}}" textWrap="true" />
+                    </GridLayout>
+                    <StackLayout orientation="horizontal" class="text-title">
+                        <StackLayout width="20">
+                            <Label text="&#xf0d6;" textWrap="true" class="fa text-center"></Label>
+                        </StackLayout>
+                        <Label text="  Hình thức thanh toán" textWrap="true"></Label>
+                    </StackLayout>
+                    <GridLayout rows="auto" columns="*" class="order-info">
+                        <Label row="0" text="{{ (paymentType == 'cod') ? 'Thanh toán khi nhận hàng' : 'Thanh toán tại quầy' }}" textWrap="true"/>
+                    </GridLayout>
+                    <StackLayout orientation="horizontal" class="text-title">
+                        <StackLayout width="20">
+                            <Label text="&#xf05a;" textWrap="true" class="fa text-center"></Label>
+                        </StackLayout>
+                        <Label text="  Thành tiền" textWrap="true"></Label>
+                    </StackLayout>
+                    <GridLayout rows="auto, auto, auto, auto, auto, auto, auto" columns="auto, *" class="order-info">
+                        <Label row="0" col="0" text="Tạm tính: " textWrap="true" class="label-input"></Label>
+                        <Label row="1" col="0" text="Phí vận chuyển: " textWrap="true" class="label-input"></Label>
+                        <Label row="3" col="0" text="Tổng tiền: " textWrap="true" class="label-input"></Label>
+
+                        <Label row="0" col="1" text="{{orderPrice.display + 'đ'}}" textWrap="true" class="text-right" verticalAlignment="bottom"></Label>
+                        <Label row="1" col="1" text="Miễn Phí" textWrap="true" class="text-right" verticalAlignment="bottom"></Label>
+                        <Label row="3" col="1" text="{{orderPrice.display + 'đ'}}" textWrap="true" class="text-right" verticalAlignment="bottom" fontWeight="Bold" fontSize="17"></Label>
+
+                        <StackLayout row="2" col="0" colSpan="2" style="border-bottom-width: 1; border-color: #888" class="m-t-10"></StackLayout>
+                    </GridLayout>
+                </StackLayout>
+            </DockLayout>
+        </ScrollView>
+        <ScrollView loaded="onScrollViewLoaded" marginRight="10" marginLeft="10" visibility="{{indexScreenShow == 4 ? 'visible' : 'collapsed'}}" id="screen-4">
+            <DockLayout stretchLastChild="true" height="100%">
+                <Button dock="bottom" text="Tiếp tục mua hàng" tap="{{goBack}}" screenIndex="4" backgroundColor="#812092" color="white" class="m-t-20 m-b-10"></Button>
+                <StackLayout height="100%" verticalAlignment="center" horizontalAlignment="center">
+                    <Image src="res://icon_payment_success" width="150" height="150" visibility="{{paymentType != 'local'  ? 'visible' : 'collapsed'}}"></Image>
+                    <Image id="QRCode" width="90%" stretch="aspectFit" visibility="{{paymentType == 'local'  ? 'visible' : 'collapsed'}}"></Image>
+                    <Label text="Đặt hàng thành công" textWrap="true" class="text-center m-t-10" color="#812092" fontSize="18"></Label>
+                </StackLayout>
+
+            </DockLayout>
+        </ScrollView>
+    </StackLayout>
+</Page>

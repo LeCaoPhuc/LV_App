@@ -1,0 +1,11 @@
+//default elements
+android {
+    productFlavors {
+        "nativescriptimagecacheit" {
+            dimension "nativescriptimagecacheit"
+        }
+    }
+}
+dependencies {
+  compile 'com.android.support:support-v4:23.2.1'
+}

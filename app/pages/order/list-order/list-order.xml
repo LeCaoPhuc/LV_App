@@ -1,0 +1,28 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" loaded="onLoaded" class="page" actionBarHidden="true"
+    xmlns:actionBar="shared/components/action-bar-back">
+    <StackLayout>
+        <actionBar:action-bar-back id="actionBar"></actionBar:action-bar-back>
+        <GridLayout rows="*,2*,3*" col="*" visibility="{{ isEmptyProductList ? 'visible' : 'collapsed' }}" backgroundColor="white"
+            height="100%" width="100%">
+            <StackLayout row="1" col="0">
+                <Image height="100" width="100" stretch="aspectFit" src="res://icon_empty_order" />
+                <Label horizontalAlignment="center" color="#812092" paddingTop="5" text="Không tìm thấy đơn hàng" textWrap="true" />
+            </StackLayout>
+        </GridLayout>
+        <GridLayout rows="*" columns="*">
+            <ListView id="lv" items="{{listOrder}}" separatorColor="#ccc" itemTap="{{onListOrderTap}}" width="100%">
+                <ListView.itemTemplate>
+                    <GridLayout rows="auto, auto, auto" columns="auto, *" paddingTop="10" paddingBottom="10" class="p-x-10">
+                        <Label row="0" col="0" text="{{'#' + orderNumber}}" textWrap="true" fontWeight="Bold"></Label>
+                        <StackLayout row="1" col="0" colSpan="2" class="m-y-10 m-l-10">
+                            <Label text="{{name}}" textWrap="true"></Label>
+                            <Label text="{{address}}" textWrap="false" width="100%"></Label>
+                        </StackLayout>
+                        <Label row="2" col="0" text="{{timeOrder}}" textWrap="true" color="#999" verticalAlignment="bottom"></Label>
+                        <Label row="2" col="1" textWrap="true" color="#812092" text="{{totalPrice + 'đ'}}" fontSize="19" class="text-right"></Label>
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </GridLayout>
+    </StackLayout>
+</Page>

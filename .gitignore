@@ -1,0 +1,11 @@
+app/**/*.js
+!app/**/libs/*.js
+hooks/
+lib/
+node_modules/
+platforms/
+tmp/
+typings/
+.DS_Store
+!plugins/**/platforms
+.vscode/

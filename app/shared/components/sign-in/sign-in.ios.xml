@@ -1,0 +1,40 @@
+<StackLayout xmlns:Card="nativescript-cardview" loaded="onLoad">
+    <Label text="{{messageError}}" textWrap="true" class="text-error"></Label>
+    <Card:CardView shadowRadius="5">
+        <GridLayout rows="auto,auto,auto,auto,auto,auto,auto" columns="auto,*,auto" class="m-x-20 m-t-10 p-t-10" backgroundColor="white"
+            borderRadius="8">
+
+            <Label row="0" col="0" text="&#xf2c0;" textWrap="true" class="fa m-x-10" color="{{signInConfig.userName.error ? '#F44336' : '#26A69A'}}"
+                fontSize="20"></Label>
+
+            <TextField row="0" col="1" text="{{signInConfig.userName.value}}" hint="{{signInConfig.userName.placeHolder}}" id="{{signInConfig.userName.id}}"
+                blur="checkInput" fontSize="18" autocapitalizationType="none"></TextField>
+
+            <Label row="0" col="2" text="&#xf057;" visibility="{{signInConfig.userName.error ? 'visible' : 'collapsed'}}" textWrap="true"
+                class="fa m-x-10" color="#F44336" fontSize="20"></Label>
+
+            <StackLayout row="1" col="0" colSpan="3" class="hr-light m-y-10"></StackLayout>
+
+            <Label row="2" col="0" text="&#xf023;" textWrap="true" class="fa m-x-10 p-l-2" color="{{signInConfig.password.error ? '#F44336' : '#26A69A'}}"
+                fontSize="20"></Label>
+
+            <TextField row="2" col="1" text="{{ signInConfig.password.value }}" hint="{{signInConfig.password.placeHolder}}" id="{{signInConfig.password.id}}"
+                blur="checkInput" fontSize="18" secure="true"></TextField>
+
+            <Label row="2" col="2" text="&#xf057;" visibility="{{signInConfig.password.error ? 'visible' : 'collapsed'}}" textWrap="true"
+                class="fa m-x-10" color="#F44336" fontSize="20"></Label>
+
+
+            <StackLayout row="3" col="0" colSpan="3" class="hr-light m-t-10"></StackLayout>
+
+            <Button row="4" col="0" colSpan="3" text="Đăng nhập" tap="signIn" class="btn-active" paddingTop="15" paddingBottom="15" backgroundColor="#FF5B55"
+                fontSize="18" color="white"></Button>
+
+        </GridLayout>
+    </Card:CardView>
+    <!-- <Button text="Quên mật khẩu?" tap="" class="m-x-20 p-10" fontSize="18" color="#2196F3" borderRadius="8"></Button> -->
+    <GridLayout rows="*" columns="*">
+        <Button text="Quên mật khẩu?" tap="onForgotPasswordTap" class="m-b-30 p-10" fontSize="18" color="#E0E0E0" borderRadius="8"
+            verticalAlignment="bottom"></Button>
+    </GridLayout>
+</StackLayout>

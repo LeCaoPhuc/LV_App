@@ -1,0 +1,38 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onLoaded" navigatingTo="onNavigatedTo" shownModally="onShownModally"
+    xmlns:actionBar="shared/components/action-bar-back" actionBarHidden="true" xmlns:i="nativescript-image-cache-it" width="{{screenWidth}}"
+    height="{{screenHeight}}">
+    <DockLayout backgroundColor="white">
+        <StackLayout dock="top">
+            <actionBar:action-bar-back id="actionBar"></actionBar:action-bar-back>
+        </StackLayout>
+        <StackLayout dock="bottom">
+
+        </StackLayout>
+        <StackLayout>
+            <ScrollView verticalAlignment="top" width="100%" height="{{ screenHeight }}">
+                <StackLayout paddingTop="10">
+                    <StackLayout class="input-layout">
+                        <Label text="Tiêu đề: " class="text-label m-b-10" textWrap="true"></Label>
+
+                        <TextField text="{{ feedbackConfig.title.value }}" hint="{{ feedbackConfig.title.placeHolder }}" id="{{ feedbackConfig.title.id }}"
+                            blur="{{ checkInput }}" class="{{ feedbackConfig.title.messageError != ' ' ? 'input-border-error' : 'input-border' }}"></TextField>
+                        <Label text="{{ feedbackConfig.title.messageError }}" paddingTop="3" class="text-error" textWrap="true"></Label>
+                    </StackLayout>
+
+                    <StackLayout class="input-layout">
+                        <Label text="Nội dung phản hồi: " paddingBottom="10" class="text-label" textWrap="true" />
+                        <TextView height="120" text="{{ feedbackConfig.content.value }}" hint="{{ feedbackConfig.content.placeHolder }}" id="{{ feedbackConfig.content.id }}"
+                            blur="{{ checkInput }}" class="{{ feedbackConfig.content.messageError != ' ' ? 'content-feedback-error' : 'content-feedback'}}" ></TextView>
+                        <Label text="{{ feedbackConfig.content.messageError }}" paddingTop="3" class="text-error" textWrap="true"></Label>
+                    </StackLayout>
+                    <StackLayout class="input-layout">
+                        <Button height="40" text="Gửi phản hồi" textWrap="true" marginBottom="5" class="raleway text-center" color="white" backgroundColor="#1565C0"
+                            fontSize="18" fontWeight="500" borderRadius="5" tap="{{ onTapSendFeedback }}"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+
+
+    </DockLayout>
+</Page>

@@ -1,0 +1,98 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="page" actionBarHidden="true" loaded="onLoaded"
+    shownModally="onShownModally" backgroundColor="rgba(0,0,0,0.75)">
+    <!-- <StackLayout height="70%">
+        <Image src="res://scale_top" stretch="aspectFit" height="14%"></Image>
+        <Image src="res://scale_body" stretch="aspectFit" height="56%"></Image>
+        <Image src="res://scale_bottom" stretch="aspectFit" height="30%"></Image>
+    </StackLayout> -->
+    <GridLayout rows="*,auto,*" columns="*,auto,*" horizontalAlignment="center">
+
+        <GridLayout row="1" col="1" rows="auto,auto,auto" backgroundColor="white" height="90%" width="90%">
+            <StackLayout row="0" width="100%">
+                <Image src="res://icon_delete_slim" height="20" horizontalAlignment="right" class="m-t-10 m-r-10" tap="goBack"></Image>
+            </StackLayout>
+            <StackLayout row="1">
+                <Label text="Giá sản phẩm tươi sống có thể thay đổi" color="white" backgroundColor="red" textWrap="true" class="m-10 text-center" padding="6%" ></Label>
+            </StackLayout>
+
+            <GridLayout row="2" rows="auto,auto,auto,auto" columns="auto" height="88%" width="88%">
+                <Image row="0" src="res://scale_top" stretch="aspectFit" width="83%"></Image>
+                <Image row="1" src="res://scale_body" stretch="aspectFit" width="82%"></Image>
+                <Image row="2" src="res://scale_bottom" stretch="aspectFit" width="100%" verticalAlignment="top"></Image>
+                <StackLayout row="0" orientation="horizontal" width="80%" marginTop="0" height="7%" verticalAlignment="center" horizontalAlignment="center">
+                    <StackLayout width="8%" verticalAlignment="center">
+                        <Image src="~/images/arrow_left" width="30%" horizontalAlignment="right" marginRight="20%"></Image>
+                    </StackLayout>
+                    <Label text="{{product._productName}}" textWrap="true" color="#ec0677" class="text-right p-x-10" borderRadius="3%"
+                        style="border-color: #5a5a5a; border-bottom-width: 1" backgroundColor="#e9e9eb" width="84%" height="100%"></Label>
+                    <StackLayout width="8%" verticalAlignment="center">
+                        <Image src="~/images/arrow_right" width="30%" horizontalAlignment="left" marginLeft="20%"></Image>
+                    </StackLayout>
+                </StackLayout>
+                <GridLayout rows="auto,auto,auto,auto" columns="*" row="1" backgroundColor="transparent" width="80%" height="47%" horizontalAlignment="center">
+                    <StackLayout row="0" col="0" orientation="horizontal" marginTop="8%" height="14%" width="100%" verticalAlignment="top" horizontalAlignment="center">
+                        <StackLayout width="8%" verticalAlignment="center">
+                            <Image src="~/images/arrow_left" width="30%" horizontalAlignment="right" marginRight="20%"></Image>
+                        </StackLayout>
+                        <GridLayout rows="*,auto,*" columns="*,auto" borderRadius="3%" width="84%" height="100%" backgroundColor="#e9e9eb" verticalAlignment="center"
+                            orientation="horizontal" style="border-color: #5a5a5a; border-bottom-width: 1">
+                            <Label row="1" col="0" text="{{price.display}}" textWrap="true" color="#202020" class="text-right p-l-10"></Label>
+                            <Label row="1" col="1" text="vnd" textWrap="true" color="#202020" class="p-r-10"></Label>
+                        </GridLayout>
+                        <StackLayout width="8%" verticalAlignment="center">
+                            <Image src="~/images/arrow_right" width="30%" horizontalAlignment="left" marginLeft="20%"></Image>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout row="1" col="0" orientation="horizontal" marginTop="5%" height="14%" width="100%" verticalAlignment="top" horizontalAlignment="center">
+                        <StackLayout width="8%" verticalAlignment="center">
+                            <Image src="~/images/arrow_left" width="30%" horizontalAlignment="right" marginRight="20%"></Image>
+                        </StackLayout>
+                        <GridLayout rows="*,auto,*" columns="*,auto" borderRadius="3%" width="84%" height="100%" backgroundColor="#e9e9eb" verticalAlignment="center"
+                            orientation="horizontal" style="border-color: #5a5a5a; border-bottom-width: 1">
+                            <Label row="1" col="0" text="{{quantity}}" textWrap="true" color="#202020" class="text-right p-l-10"></Label>
+                            <Label row="1" col="1" text="gr" textWrap="true" color="#202020" class="p-r-10"></Label>
+                        </GridLayout>
+                        <StackLayout width="8%" verticalAlignment="center">
+                            <Image src="~/images/arrow_right" width="30%" horizontalAlignment="left" marginLeft="20%"></Image>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout row="2" col="0" orientation="horizontal" marginTop="10%" height="12%" width="100%" verticalAlignment="top" horizontalAlignment="right">
+                        <StackLayout verticalAlignment="center" tap="{{onTapMiniusButton}}">
+                            <Image src="res://icon_scale_minius"></Image>
+                        </StackLayout>
+                        <StackLayout verticalAlignment="center" marginLeft="5%" marginRight="8%" tap="{{onTapPlusButton}}">
+                            <Image src="res://icon_scale_plus"></Image>
+                        </StackLayout>
+                    </StackLayout>
+                    <FlexboxLayout row="3" col="0" flexDirection="row" justifyContent="center" marginTop="12%" height="14%" width="100%" verticalAlignment="top"
+                        horizontalAlignment="right">
+                        <StackLayout verticalAlignment="center" marginRight="6%">
+                            <Image src="{{ (disableButton <= 1) ? 'res://icon_scale_quarter' : 'res://icon_scale_quarter_disable'}}" touch="{{onTapQuarterButton}}"></Image>
+                        </StackLayout>
+                        <StackLayout verticalAlignment="center" marginRight="6%">
+                            <Image src="{{ (disableButton <= 2) ? 'res://icon_scale_half' : 'res://icon_scale_half_disable'}}" touch="{{onTapHalfButton}}"></Image>
+                        </StackLayout>
+                        <StackLayout verticalAlignment="center" marginRight="6%">
+                            <Image src="{{ (disableButton <= 3) ? 'res://icon_scale_three_quarter' : 'res://icon_scale_three_quarter_disable'}}" touch="{{onTapThreeQuarterButton}}"></Image>
+                        </StackLayout>
+                        <StackLayout verticalAlignment="center">
+                            <Image src="{{ (disableButton <= 4) ? 'res://icon_scale_1kg' : 'res://icon_scale_1kg_disable'}}" touch="{{onTapOneKgButton}}"></Image>
+                        </StackLayout>
+                    </FlexboxLayout>
+                </GridLayout>
+                <Image row="2" src="{{product._productImageList[0]}}" stretch="aspectFit" width="40%"></Image>
+
+
+            </GridLayout>
+            <StackLayout row="2" height="13%" horizontalAlignment="center" verticalAlignment="center" marginTop="58%">
+                <Image src="res://icon_scale_confirm" stretch="aspectFit" height="100%" tap="{{confirm}}"></Image>
+            </StackLayout>
+        </GridLayout>
+
+        <StackLayout row="0" col="0" colSpan="3" tap="goBack"> </StackLayout>
+        <StackLayout row="1" col="0" tap="goBack"> </StackLayout>
+        <StackLayout row="1" col="2" tap="goBack"> </StackLayout>
+        <StackLayout row="2" col="0" colSpan="3" tap="goBack"> </StackLayout>
+
+    </GridLayout>
+</Page>

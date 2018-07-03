@@ -1,0 +1,17 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" shownModally="onShownModally" loaded="onLoaded" actionBarHidden="true"
+    xmlns:actionBarBack="shared/components/action-bar-back">
+    <StackLayout backgroundColor="white">
+        <actionBarBack:action-bar-back id="actionBar"></actionBarBack:action-bar-back>
+        <GridLayout rows="*" columns="*">
+            <ListView id="listView" items="{{ content }}" itemTap="" separatorColor="white">
+                <ListView.itemTemplate>
+                    <StackLayout class="p-10">
+                        <Label text="{{index + '. ' + header}}" textWrap="true" color="#1565C0" fontWeight="Bold"></Label>
+                        <Label text="{{body}}" textWrap="true" class="m-y-10"></Label>
+                        <Label text="{{footer}}" textWrap="true" class="text-right" fontStyle="italic"></Label>
+                    </StackLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </GridLayout>
+    </StackLayout>
+</Page>

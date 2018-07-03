@@ -1,0 +1,50 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onLoaded" navigatingTo="onNavigatingTo" actionBarHidden="true"
+    xmlns:lv="nativescript-telerik-ui/listview" xmlns:nsDrawer="nativescript-telerik-ui/sidedrawer" xmlns:sideBar="shared/components/side-bar-content"
+    xmlns:actionBar="shared/components/action-bar" xmlns:departmentStore="shared/components/department-store" xmlns:departmentSlider="shared/components/department-slider"
+    xmlns:cart="shared/components/cart" xmlns:i="nativescript-image-cache-it">
+    <nsDrawer:RadSideDrawer id="sideBar" gesturesEnabled="false" showOverNavigation="true" drawerContentSize="{{screenWidth*0.85}}">
+        <nsDrawer:RadSideDrawer.drawerContent>
+            <sideBar:side-bar-content />
+        </nsDrawer:RadSideDrawer.drawerContent>
+        <nsDrawer:RadSideDrawer.mainContent>
+            <GridLayout row="auto" id="productListLayout">
+                <DockLayout row="0" id="sliderView" onPan="{{ onPanSlider }}" backgroundImage="res://background_shelf" stretchLastChild="false">
+                    <StackLayout dock="top">
+                        <GridLayout rows="50" id="actionBar" columns="40,*,40" class="action-bar">
+                            <StackLayout row="0" tap="{{ goBack }}" horizontalAlignment="left" width="15%" height="50">
+                                <Button text="&#xf104;" style="font-size: 35" class="fa" color="white" horizontalAlignment="left" tap="{{ goBack }}" />
+                            </StackLayout>
+                            <StackLayout col="1" verticalAlignment="middle">
+                                <Label text="{{ actionBarTitle }}" id="textTitle" textWrap="true" color="white" class="text-center" fontSize="18" loaded="onTitleCreatingView"></Label>
+                            </StackLayout>
+                        </GridLayout>
+                    </StackLayout>
+                    <GridLayout id="cart-icon" dock="bottom" backgroundColor="rgba(0,0,0,0)" rows="15,10,40,10" columns="*,*,*,*,*,*,*,*,*,*,*,*">
+                        <StackLayout col="0" row="2" colSpan="2" tap="{{ onTapShowManyScreen }}" style="z-index: 0">
+                            <Image stretch="aspectFit" src="res://group_product_3_3" />
+                        </StackLayout>
+                        <GridLayout rows="25,*" columns="*" row="0" rowSpan="4" col="2" colSpan="8" onPan="{{ onPanCart }}">
+                            <StackLayout row="0" col="0" horizontalAlignment="center" verticalAlignment="center" marginBottom="5">
+                                <Image width="10" height="10" stretch="aspectFit" src="res://icon_double_arrow_up" />
+                            </StackLayout>
+                            <StackLayout row="1" col="0" verticalAlignment="bottom" orientation="vertical">
+                                <Image verticalAlignment="bottom" stretch="aspectFill" src="res://icon_cart" />
+                            </StackLayout>
+                        </GridLayout>
+
+                        <StackLayout col="10" row="2" colSpan="2" tap="{{ onTapScanBarcode }}" style="z-index: 1">
+                            <Image stretch="aspectFit" src="res://scan_barcode" />
+                        </StackLayout>
+                    </GridLayout>
+                    <departmentSlider:department-slider visibility="{{ !isEmptyProductList ? 'visible' : 'collapsed' }}" id="departmentSlider"></departmentSlider:department-slider>
+                </DockLayout>
+
+                <cart:cart row="0" id="cart" showBtnGroup="false" showBtnScan="true" visibility="hidden" style="z-index: 1"></cart:cart>
+                <StackLayout id="confirmAddProductToCart" height="75" style="width: 20%" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0)"
+                    visibility="collapse" marginBottom="40" style="z-index: 2">
+                    <Image row="0" col="2" stretch="aspectFit" src="res://icon_confirm" />
+                </StackLayout>
+            </GridLayout>
+        </nsDrawer:RadSideDrawer.mainContent>
+    </nsDrawer:RadSideDrawer>
+</Page>

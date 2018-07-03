@@ -1,0 +1,1730 @@
+<GridLayout loaded="onLoaded"
+    xmlns:product="shared/components/product-item"
+    xmlns:lv="nativescript-telerik-ui/listview"
+    xmlns:i="nativescript-image-cache-it">
+    <GridLayout id="firstSlider">
+        <GridLayout  rows="*,*,*,*,*,*,*,*,*,*,*,*,*" columns="*" >
+            <!-- firstProductList[0] -->
+            <GridLayout visibility="{{ (firstProductList[0] && firstProductList[0].productItems.length != 0) ? 'visible' : 'collapsed' }}" row="1" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="3" col="0">
+                <Image src="res://shelf" row="7" rowSpan="4" col="0" 
+                visibility="{{ ( firstProductList[0].productItems[0] && firstProductList[0].productItems[0]._productId ) || (firstProductList[0].productItems[1] && firstProductList[2].productItems[1]._productId )|| (firstProductList[0].productItems[2] && firstProductList[0].productItems[2]._productId ) ? 'visible' : 'collapsed' }}"/>
+                <GridLayout rows="*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="16" >
+                    <!-- product 1 -->
+                    <GridLayout   tap="onTapProduct" longPress="onTapProductDetails"   pan="onFirstPanSlider" index="00" product="{{ firstProductList[0].productItems[0] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="1" colSpan="4" 
+                    visibility="{{ firstProductList[0].productItems[0]._productId  ? 'visible' : 'collapsed' }}">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ firstProductList[0].productItems[0]._productImageList[0] ? firstProductList[0].productItems[0]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!firstProductList[0].productItems[0]._productIsFresh && firstProductList[0].productItems[0]._typeOfProduct != 'favorite') && (firstProductList[0].productItems[0]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ firstProductList[0].productItems[0]._quantity <= 99 ? firstProductList[0].productItems[0]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ firstProductList[0].productItems[0]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ firstProductList[0].productItems[0]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ firstProductList[0].productItems[0]._typeOfProduct != 'favorite' && firstProductList[0].productItems[0]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ firstProductList[0].productItems[0]._productFinalPrice != firstProductList[0].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ firstProductList[0].productItems[0]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{  firstProductList[0].productItems[0]._lastPriceDisplay}}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label  text="{{ firstProductList[0].productItems[0]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                         visibility="{{ firstProductList[0].productItems[0]._productFinalPrice == firstProductList[0].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ firstProductList[0].productItems[0]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ firstProductList[0].productItems[0]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>        
+                    </GridLayout>
+                    <!-- product 2 -->
+                    <GridLayout visibility="{{ firstProductList[0].productItems[1]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onFirstPanSlider" index="01" product="{{ firstProductList[0].productItems[1] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="6" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ firstProductList[0].productItems[1]._productImageList[0] ? firstProductList[0].productItems[1]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!firstProductList[0].productItems[1]._productIsFresh && firstProductList[0].productItems[1]._typeOfProduct != 'favorite') && (firstProductList[0].productItems[1]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ firstProductList[0].productItems[1]._quantity <= 99 ? firstProductList[0].productItems[1]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ firstProductList[0].productItems[1]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ firstProductList[0].productItems[1]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ firstProductList[0].productItems[1]._typeOfProduct != 'favorite' && firstProductList[0].productItems[1]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ firstProductList[0].productItems[1]._productFinalPrice != firstProductList[0].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ firstProductList[0].productItems[1]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ firstProductList[0].productItems[1]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ firstProductList[0].productItems[1]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                         visibility="{{ firstProductList[0].productItems[1]._productFinalPrice == firstProductList[0].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{  firstProductList[0].productItems[1]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{firstProductList[0].productItems[1]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>          
+                    </GridLayout>
+                    <!-- product 3 -->
+                    <GridLayout visibility="{{ firstProductList[0].productItems[2]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onFirstPanSlider" index="02" product="{{ firstProductList[0].productItems[2] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="11" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ firstProductList[0].productItems[2]._productImageList[0] ? firstProductList[0].productItems[2]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!firstProductList[0].productItems[2]._productIsFresh && firstProductList[0].productItems[2]._typeOfProduct != 'favorite') && (firstProductList[0].productItems[2]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ firstProductList[0].productItems[2]._quantity <= 99 ? firstProductList[0].productItems[2]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ firstProductList[0].productItems[2]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ firstProductList[0].productItems[2]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ firstProductList[0].productItems[2]._typeOfProduct != 'favorite' && firstProductList[0].productItems[2]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ firstProductList[0].productItems[2]._productFinalPrice != firstProductList[0].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ firstProductList[0].productItems[2]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ firstProductList[0].productItems[2]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ firstProductList[0].productItems[2]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ firstProductList[0].productItems[2]._productFinalPrice == firstProductList[0].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{  firstProductList[0].productItems[2]._firstPriceDisplay  }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ firstProductList[0].productItems[2]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>       
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+            <!-- firstProductList[1] -->
+            <GridLayout visibility="{{ (firstProductList[1] && firstProductList[1].productItems.length != 0) ? 'visible' : 'collapsed' }}" row="5" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="3" col="0">
+                <Image  src="res://shelf" row="7" rowSpan="4" col="0"  
+                visibility="{{ ( firstProductList[1].productItems[0] && firstProductList[1].productItems[0]._productId ) || (firstProductList[1].productItems[1] && firstProductList[1].productItems[1]._productId )|| (firstProductList[1].productItems[2] && firstProductList[1].productItems[2]._productId ) ? 'visible' : 'collapsed' }}"/>
+                <GridLayout rows="*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="16">
+                    <!-- product 1 -->
+                    <GridLayout visibility="{{ firstProductList[1].productItems[0]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onFirstPanSlider" index="10" product="{{ firstProductList[1].productItems[0] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="1" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ firstProductList[1].productItems[0]._productImageList[0] ? firstProductList[1].productItems[0]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!firstProductList[1].productItems[0]._productIsFresh && firstProductList[1].productItems[0]._typeOfProduct != 'favorite') && (firstProductList[1].productItems[0]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ firstProductList[1].productItems[0]._quantity <= 99 ? firstProductList[1].productItems[0]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ firstProductList[1].productItems[0]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ firstProductList[1].productItems[0]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ firstProductList[1].productItems[0]._typeOfProduct != 'favorite' && firstProductList[1].productItems[0]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ firstProductList[1].productItems[0]._productFinalPrice != firstProductList[1].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ firstProductList[1].productItems[0]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ firstProductList[1].productItems[0]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ firstProductList[1].productItems[0]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ firstProductList[1].productItems[0]._productFinalPrice == firstProductList[1].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ firstProductList[1].productItems[0]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ firstProductList[1].productItems[0]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>         
+                    </GridLayout>
+                    <!-- product 2 -->
+                    <GridLayout visibility="{{ firstProductList[1].productItems[1]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onFirstPanSlider" index="11" product="{{ firstProductList[1].productItems[1] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="6" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ firstProductList[1].productItems[1]._productImageList[0] ? firstProductList[1].productItems[1]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!firstProductList[1].productItems[1]._productIsFresh && firstProductList[1].productItems[1]._typeOfProduct != 'favorite') && (firstProductList[1].productItems[1]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ firstProductList[1].productItems[1]._quantity <= 99 ? firstProductList[1].productItems[1]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ firstProductList[1].productItems[1]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ firstProductList[1].productItems[1]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ firstProductList[1].productItems[1]._typeOfProduct != 'favorite' && firstProductList[1].productItems[1]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ firstProductList[1].productItems[1]._productFinalPrice != firstProductList[1].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ firstProductList[1].productItems[1]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ firstProductList[1].productItems[1]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ firstProductList[1].productItems[1]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ firstProductList[1].productItems[1]._productFinalPrice == firstProductList[1].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ firstProductList[1].productItems[1]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ firstProductList[1].productItems[1]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>      
+                    </GridLayout>
+                    <!-- product 3 -->
+                    <GridLayout visibility="{{ firstProductList[1].productItems[2]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onFirstPanSlider" index="12" product="{{ firstProductList[1].productItems[2] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="11" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ firstProductList[1].productItems[2]._productImageList[0] ? firstProductList[1].productItems[2]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!firstProductList[1].productItems[2]._productIsFresh && firstProductList[1].productItems[2]._typeOfProduct != 'favorite') && (firstProductList[1].productItems[2]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ firstProductList[1].productItems[2]._quantity <= 99 ? firstProductList[1].productItems[2]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ firstProductList[1].productItems[2]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ firstProductList[1].productItems[2]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ firstProductList[1].productItems[2]._typeOfProduct != 'favorite' && firstProductList[1].productItems[2]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ firstProductList[1].productItems[2]._productFinalPrice != firstProductList[1].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ firstProductList[1].productItems[2]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ firstProductList[1].productItems[2]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ firstProductList[1].productItems[2]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ firstProductList[1].productItems[2]._productFinalPrice == firstProductList[1].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ firstProductList[1].productItems[2]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ firstProductList[1].productItems[2]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>  
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+            <!-- firstProductList[2] -->
+            <GridLayout visibility="{{ (firstProductList[2] && firstProductList[2].productItems.length != 0) ? 'visible' : 'collapsed' }}" row="9" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="3" col="0">
+                <Image  src="res://shelf"  row="7" rowSpan="4" col="0"  
+                visibility="{{ ( firstProductList[2].productItems[0] && firstProductList[2].productItems[0]._productId ) || (firstProductList[2].productItems[1] && firstProductList[2].productItems[1]._productId )|| (firstProductList[2].productItems[2] && firstProductList[2].productItems[2]._productId ) ? 'visible' : 'collapsed' }}"/>
+                <GridLayout rows="*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="16">
+                    <!-- product 1 -->
+                    <GridLayout visibility="{{ firstProductList[2].productItems[0]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onFirstPanSlider" index="20" product="{{ firstProductList[2].productItems[0] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="1" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ firstProductList[2].productItems[0]._productImageList[0] ? firstProductList[2].productItems[0]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!firstProductList[2].productItems[0]._productIsFresh && firstProductList[2].productItems[0]._typeOfProduct != 'favorite') && (firstProductList[2].productItems[0]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ firstProductList[2].productItems[0]._quantity <= 99 ? firstProductList[2].productItems[0]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ firstProductList[2].productItems[0]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ firstProductList[2].productItems[0]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ firstProductList[2].productItems[0]._typeOfProduct != 'favorite' && firstProductList[2].productItems[0]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>    
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ firstProductList[2].productItems[0]._productFinalPrice != firstProductList[2].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ firstProductList[2].productItems[0]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{  firstProductList[2].productItems[0]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{firstProductList[2].productItems[0]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ firstProductList[2].productItems[0]._productFinalPrice == firstProductList[2].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ firstProductList[2].productItems[0]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ firstProductList[2].productItems[0]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>   
+                    </GridLayout>
+                    <!-- product 2 -->
+                    <GridLayout visibility="{{ firstProductList[2].productItems[1]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onFirstPanSlider" index="21" product="{{ firstProductList[2].productItems[1] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="6" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ firstProductList[2].productItems[1]._productImageList[0] ? firstProductList[2].productItems[1]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!firstProductList[2].productItems[1]._productIsFresh && firstProductList[2].productItems[1]._typeOfProduct != 'favorite') && (firstProductList[2].productItems[1]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ firstProductList[2].productItems[1]._quantity <= 99 ? firstProductList[2].productItems[1]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ firstProductList[2].productItems[1]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ firstProductList[2].productItems[1]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ firstProductList[2].productItems[1]._typeOfProduct != 'favorite' && firstProductList[2].productItems[1]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ firstProductList[2].productItems[1]._productFinalPrice != firstProductList[2].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{firstProductList[2].productItems[1]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ firstProductList[2].productItems[1]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ firstProductList[2].productItems[1]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ firstProductList[2].productItems[1]._productFinalPrice == firstProductList[2].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ firstProductList[2].productItems[1]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ firstProductList[2].productItems[1]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>     
+                    </GridLayout>
+                    <!-- product 3 -->
+                    <GridLayout visibility="{{ firstProductList[2].productItems[2]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onFirstPanSlider" index="22" product="{{ firstProductList[2].productItems[2] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="11" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ firstProductList[2].productItems[2]._productImageList[0] ? firstProductList[2].productItems[2]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!firstProductList[2].productItems[2]._productIsFresh && firstProductList[2].productItems[2]._typeOfProduct != 'favorite') && (firstProductList[2].productItems[2]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ firstProductList[2].productItems[2]._quantity <= 99 ? firstProductList[2].productItems[2]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ firstProductList[2].productItems[2]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ firstProductList[2].productItems[2]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ firstProductList[2].productItems[2]._typeOfProduct != 'favorite' && firstProductList[2].productItems[2]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ firstProductList[2].productItems[2]._productFinalPrice != firstProductList[2].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ firstProductList[2].productItems[2]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ firstProductList[2].productItems[2]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{firstProductList[2].productItems[2]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ firstProductList[2].productItems[2]._productFinalPrice == firstProductList[2].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ firstProductList[2].productItems[2]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ firstProductList[2].productItems[2]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>  
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+        </GridLayout>
+    </GridLayout>
+    <GridLayout id="secondSlider">
+        <GridLayout  rows="*,*,*,*,*,*,*,*,*,*,*,*,*" columns="*" >
+            <!-- secondProductList[0] -->
+            <GridLayout visibility="{{ (secondProductList[0] && secondProductList[0].productItems.length != 0) ? 'visible' : 'collapsed' }}" row="1" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="3" col="0">
+                <Image src="res://shelf" row="7" rowSpan="4" col="0" 
+                visibility="{{ ( secondProductList[0].productItems[0] && secondProductList[0].productItems[0]._productId ) || (secondProductList[0].productItems[1] && secondProductList[0].productItems[1]._productId ) || (secondProductList[0].productItems[2] && secondProductList[0].productItems[2]._productId ) ? 'visible' : 'collapsed' }}"/>
+                <GridLayout rows="*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="16">
+                    <!-- product 1 -->
+                    <GridLayout visibility="{{ secondProductList[0].productItems[0]._productId  ? 'visible' : 'collapsed' }}"  tap="onTapProduct" longPress="onTapProductDetails"   pan="onSecondPanSlider" index="00" product="{{ secondProductList[0].productItems[0] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="1" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ secondProductList[0].productItems[0]._productImageList[0] ? secondProductList[0].productItems[0]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!secondProductList[0].productItems[0]._productIsFresh && secondProductList[0].productItems[0]._typeOfProduct != 'favorite') && (secondProductList[0].productItems[0]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ secondProductList[0].productItems[0]._quantity <= 99 ? secondProductList[0].productItems[0]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ secondProductList[0].productItems[0]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ secondProductList[0].productItems[0]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ secondProductList[0].productItems[0]._typeOfProduct != 'favorite' && secondProductList[0].productItems[0]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ secondProductList[0].productItems[0]._productFinalPrice != secondProductList[0].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout verticalAlignment="top" width="auto" >
+                                    <Label color="white" verticalAlignment="top" text="{{ secondProductList[0].productItems[0]._firstPriceDisplay  }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ secondProductList[0].productItems[0]._lastPriceDisplay}}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ secondProductList[0].productItems[0]._productPercentPrice  }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ secondProductList[0].productItems[0]._productFinalPrice == secondProductList[0].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" >
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ secondProductList[0].productItems[0]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ secondProductList[0].productItems[0]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>    
+                    </GridLayout>
+                    <!-- product 2 -->
+                    <GridLayout visibility="{{ secondProductList[0].productItems[1]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onSecondPanSlider" index="01" product="{{ secondProductList[0].productItems[1] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="6" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ secondProductList[0].productItems[1]._productImageList[0] ? secondProductList[0].productItems[1]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!secondProductList[0].productItems[1]._productIsFresh && secondProductList[0].productItems[1]._typeOfProduct != 'favorite') && (secondProductList[0].productItems[1]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ secondProductList[0].productItems[1]._quantity <= 99 ? secondProductList[0].productItems[1]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ secondProductList[0].productItems[1]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ secondProductList[0].productItems[1]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ secondProductList[0].productItems[1]._typeOfProduct != 'favorite' && secondProductList[0].productItems[1]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ secondProductList[0].productItems[1]._productFinalPrice != secondProductList[0].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ secondProductList[0].productItems[1]._firstPriceDisplay  }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ secondProductList[0].productItems[1]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ secondProductList[0].productItems[1]._productPercentPrice  }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ secondProductList[0].productItems[1]._productFinalPrice == secondProductList[0].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}" >
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ secondProductList[0].productItems[1]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ secondProductList[0].productItems[1]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>      
+                    </GridLayout>
+                    <!-- product 3 -->
+                    <GridLayout visibility="{{ secondProductList[0].productItems[2]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onSecondPanSlider" index="02" product="{{ secondProductList[0].productItems[2] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="11" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ secondProductList[0].productItems[2]._productImageList[0] ? secondProductList[0].productItems[2]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!secondProductList[0].productItems[2]._productIsFresh && secondProductList[0].productItems[2]._typeOfProduct != 'favorite') && (secondProductList[0].productItems[2]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ secondProductList[0].productItems[2]._quantity <= 99 ? secondProductList[0].productItems[2]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ secondProductList[0].productItems[2]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ secondProductList[0].productItems[2]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ secondProductList[0].productItems[2]._typeOfProduct != 'favorite' && secondProductList[0].productItems[2]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ secondProductList[0].productItems[2]._productFinalPrice != secondProductList[0].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ secondProductList[0].productItems[2]._firstPriceDisplay  }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ secondProductList[0].productItems[2]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ secondProductList[0].productItems[2]._productPercentPrice  }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ secondProductList[0].productItems[2]._productFinalPrice == secondProductList[0].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ secondProductList[0].productItems[2]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ secondProductList[0].productItems[2]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>        
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+            <!-- secondProductList[1] -->
+            <GridLayout visibility="{{ (secondProductList[1] && secondProductList[1].productItems.length != 0) ? 'visible' : 'collapsed' }}" row="5" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="3" col="0">
+                <Image  src="res://shelf" row="7" rowSpan="4" col="0" 
+                visibility="{{ ( secondProductList[1].productItems[0] && secondProductList[1].productItems[0]._productId ) || (secondProductList[1].productItems[0] && secondProductList[1].productItems[1]._productId)|| (secondProductList[1].productItems[2] && secondProductList[1].productItems[2]._productId)  ? 'visible' : 'collapsed' }}"/>
+                <GridLayout rows="*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="16">
+                    <!-- product 1 -->
+                    <GridLayout visibility="{{ secondProductList[1].productItems[0]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onSecondPanSlider" index="10" product="{{ secondProductList[1].productItems[0] }}" 
+                    columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="1" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ secondProductList[1].productItems[0]._productImageList[0] ? secondProductList[1].productItems[0]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!secondProductList[1].productItems[0]._productIsFresh && secondProductList[1].productItems[0]._typeOfProduct != 'favorite') && (secondProductList[1].productItems[0]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ secondProductList[1].productItems[0]._quantity <= 99 ? secondProductList[1].productItems[0]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ secondProductList[1].productItems[0]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ secondProductList[1].productItems[0]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ secondProductList[1].productItems[0]._typeOfProduct != 'favorite' && secondProductList[1].productItems[0]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ secondProductList[1].productItems[0]._productFinalPrice != secondProductList[1].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ secondProductList[1].productItems[0]._firstPriceDisplay  }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ secondProductList[1].productItems[0]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ secondProductList[1].productItems[0]._productPercentPrice  }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ secondProductList[1].productItems[0]._productFinalPrice == secondProductList[1].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" >
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ secondProductList[1].productItems[0]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ secondProductList[1].productItems[0]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>  
+                    </GridLayout>
+                    <!-- product 2 -->
+                    <GridLayout visibility="{{ secondProductList[1].productItems[1]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onSecondPanSlider" index="11" product="{{ secondProductList[1].productItems[1] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="6" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ secondProductList[1].productItems[1]._productImageList[0] ? secondProductList[1].productItems[1]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!secondProductList[1].productItems[1]._productIsFresh && secondProductList[1].productItems[1]._typeOfProduct != 'favorite') && (secondProductList[1].productItems[1]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ secondProductList[1].productItems[1]._quantity <= 99 ? secondProductList[1].productItems[1]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ secondProductList[1].productItems[1]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ secondProductList[1].productItems[1]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ secondProductList[1].productItems[1]._typeOfProduct != 'favorite' && secondProductList[1].productItems[1]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" visibility="{{ secondProductList[1].productItems[1]._productFinalPrice != secondProductList[1].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}"  flexDirection="column" justifyContent="center" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ secondProductList[1].productItems[1]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ secondProductList[1].productItems[1]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label  text="{{ secondProductList[1].productItems[1]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ secondProductList[1].productItems[1]._productFinalPrice == secondProductList[1].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}" >
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ secondProductList[1].productItems[1]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ secondProductList[1].productItems[1]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>    
+                    </GridLayout>
+                    <!-- product 3 -->
+                    <GridLayout visibility="{{ secondProductList[1].productItems[2]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onSecondPanSlider" index="12" product="{{ secondProductList[1].productItems[2] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="11" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ secondProductList[1].productItems[2]._productImageList[0] ? secondProductList[1].productItems[2]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!secondProductList[1].productItems[2]._productIsFresh && secondProductList[1].productItems[2]._typeOfProduct != 'favorite') && (secondProductList[1].productItems[2]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ secondProductList[1].productItems[2]._quantity <= 99 ? secondProductList[1].productItems[2]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ secondProductList[1].productItems[2]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ secondProductList[1].productItems[2]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ secondProductList[1].productItems[2]._typeOfProduct != 'favorite' && secondProductList[1].productItems[2]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                         visibility="{{ secondProductList[1].productItems[2]._productFinalPrice != secondProductList[1].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ secondProductList[1].productItems[2]._firstPriceDisplay  }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ secondProductList[1].productItems[2]._lastPriceDisplay  }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{secondProductList[1].productItems[2]._productPercentPrice  }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ secondProductList[1].productItems[2]._productFinalPrice == secondProductList[1].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}" >
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ secondProductList[1].productItems[2]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ secondProductList[1].productItems[2]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>      
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+            <!-- secondProductList[2] -->
+            <GridLayout visibility="{{ (secondProductList[2] && secondProductList[2].productItems.length != 0) ? 'visible' : 'collapsed' }}" row="9" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="3" col="0">
+                <Image  src="res://shelf"  row="7" rowSpan="4" col="0" 
+                visibility="{{ ( secondProductList[2].productItems[0] && secondProductList[2].productItems[0]._productId ) || (secondProductList[2].productItems[1] && secondProductList[2].productItems[1]._productId )|| (secondProductList[2].productItems[2] && secondProductList[2].productItems[2]._productId ) ? 'visible' : 'collapsed' }}" />
+                <GridLayout rows="*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="16">
+                    <!-- product 1 -->
+                    <GridLayout visibility="{{ secondProductList[2].productItems[0]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onSecondPanSlider" index="20" product="{{ secondProductList[2].productItems[0] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="1" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ secondProductList[2].productItems[0]._productImageList[0] ? secondProductList[2].productItems[0]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!secondProductList[2].productItems[0]._productIsFresh && secondProductList[2].productItems[0]._typeOfProduct != 'favorite') && (secondProductList[2].productItems[0]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ secondProductList[2].productItems[0]._quantity <= 99 ? secondProductList[2].productItems[0]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ secondProductList[2].productItems[0]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ secondProductList[2].productItems[0]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ secondProductList[2].productItems[0]._typeOfProduct != 'favorite' && secondProductList[2].productItems[0]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                         visibility="{{ secondProductList[2].productItems[0]._productFinalPrice != secondProductList[2].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ secondProductList[2].productItems[0]._firstPriceDisplay  }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ secondProductList[1].productItems[2]._lastPriceDisplay  }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ secondProductList[2].productItems[0]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ secondProductList[2].productItems[0]._productFinalPrice == secondProductList[2].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" >
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ secondProductList[2].productItems[0]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{  secondProductList[2].productItems[0]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>        
+                    </GridLayout>
+                    <!-- product 2 -->
+                    <GridLayout visibility="{{ secondProductList[2].productItems[1]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onSecondPanSlider" index="21" product="{{ secondProductList[2].productItems[1] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="6" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ secondProductList[2].productItems[1]._productImageList[0] ? secondProductList[2].productItems[1]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!secondProductList[2].productItems[1]._productIsFresh && secondProductList[2].productItems[1]._typeOfProduct != 'favorite') && (secondProductList[2].productItems[1]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ secondProductList[2].productItems[1]._quantity <= 99 ? secondProductList[2].productItems[1]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ secondProductList[2].productItems[1]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ secondProductList[2].productItems[1]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ secondProductList[2].productItems[1]._typeOfProduct != 'favorite' && secondProductList[2].productItems[1]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                         visibility="{{ secondProductList[2].productItems[1]._productFinalPrice != secondProductList[2].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{  secondProductList[2].productItems[1]._firstPriceDisplay   }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ secondProductList[2].productItems[1]._lastPriceDisplay  }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{  secondProductList[2].productItems[1]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ secondProductList[2].productItems[1]._productFinalPrice == secondProductList[2].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ secondProductList[2].productItems[1]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{  secondProductList[2].productItems[1]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>       
+                    </GridLayout>
+                    <!-- product 3 -->
+                    <GridLayout visibility="{{ secondProductList[2].productItems[2]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onSecondPanSlider" index="22" product="{{ secondProductList[2].productItems[2] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="11" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ secondProductList[2].productItems[2]._productImageList[0] ? secondProductList[2].productItems[2]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!secondProductList[2].productItems[2]._productIsFresh && secondProductList[2].productItems[2]._typeOfProduct != 'favorite') && (secondProductList[2].productItems[2]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ secondProductList[2].productItems[2]._quantity <= 99 ? secondProductList[2].productItems[2]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ secondProductList[2].productItems[2]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ secondProductList[2].productItems[2]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ secondProductList[2].productItems[2]._typeOfProduct != 'favorite' && secondProductList[2].productItems[2]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                         visibility="{{ secondProductList[2].productItems[2]._productFinalPrice != secondProductList[2].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ secondProductList[2].productItems[2]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{  secondProductList[2].productItems[2]._lastPriceDisplay  }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ secondProductList[2].productItems[2]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ secondProductList[2].productItems[2]._productFinalPrice == secondProductList[2].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ secondProductList[2].productItems[2]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ secondProductList[2].productItems[2]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>  
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+        </GridLayout>
+    </GridLayout>
+    <GridLayout id="thirdSlider">
+        <GridLayout  rows="*,*,*,*,*,*,*,*,*,*,*,*,*" columns="*" >
+            <!-- thirdProductList[0] -->
+            <GridLayout visibility="{{ (thirdProductList[0] && thirdProductList[0].productItems.length != 0) ? 'visible' : 'collapsed' }}" row="1" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="3" col="0">
+                <Image src="res://shelf" row="7" rowSpan="4" col="0" 
+                visibility="{{ ( thirdProductList[0].productItems[0] && thirdProductList[0].productItems[0]._productId ) || (thirdProductList[0].productItems[1] && thirdProductList[2].productItems[1]._productId )|| (thirdProductList[0].productItems[2] && thirdProductList[0].productItems[2]._productId ) ? 'visible' : 'collapsed' }}"/>
+                <GridLayout rows="*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="16">
+                    <!-- product 1 -->
+                    <GridLayout visibility="{{ thirdProductList[0].productItems[0]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onThirdPanSlider" index="00" product="{{ thirdProductList[0].productItems[0] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="1" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ thirdProductList[0].productItems[0]._productImageList[0] ? thirdProductList[0].productItems[0]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!thirdProductList[0].productItems[0]._productIsFresh && thirdProductList[0].productItems[0]._typeOfProduct != 'favorite') && (thirdProductList[0].productItems[0]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ thirdProductList[0].productItems[0]._quantity <= 99 ? thirdProductList[0].productItems[0]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ thirdProductList[0].productItems[0]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ thirdProductList[0].productItems[0]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ thirdProductList[0].productItems[0]._typeOfProduct != 'favorite' && thirdProductList[0].productItems[0]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                         visibility="{{ thirdProductList[0].productItems[0]._productFinalPrice != thirdProductList[0].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ thirdProductList[0].productItems[0]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ thirdProductList[0].productItems[0]._lastPriceDisplay  }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ thirdProductList[0].productItems[0]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ thirdProductList[0].productItems[0]._productFinalPrice == thirdProductList[0].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ thirdProductList[0].productItems[0]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{  thirdProductList[0].productItems[0]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>    
+                    </GridLayout>
+                    <!-- product 2 -->
+                    <GridLayout visibility="{{ thirdProductList[0].productItems[1]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onThirdPanSlider" index="01" product="{{ thirdProductList[0].productItems[1] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="6" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ thirdProductList[0].productItems[1]._productImageList[0] ? thirdProductList[0].productItems[1]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!thirdProductList[0].productItems[1]._productIsFresh && thirdProductList[0].productItems[1]._typeOfProduct != 'favorite') && (thirdProductList[0].productItems[1]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ thirdProductList[0].productItems[1]._quantity <= 99 ? thirdProductList[0].productItems[1]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ thirdProductList[0].productItems[1]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ thirdProductList[0].productItems[1]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ thirdProductList[0].productItems[1]._typeOfProduct != 'favorite' && thirdProductList[0].productItems[1]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ thirdProductList[0].productItems[1]._productFinalPrice != thirdProductList[0].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{  thirdProductList[0].productItems[1]._firstPriceDisplay}}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ thirdProductList[0].productItems[1]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ thirdProductList[0].productItems[1]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ thirdProductList[0].productItems[1]._productFinalPrice == thirdProductList[0].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{thirdProductList[0].productItems[1]._firstPriceDisplay}}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ thirdProductList[0].productItems[1]._lastPriceDisplay  }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>  
+                    </GridLayout>
+                    <!-- product 3 -->
+                    <GridLayout visibility="{{ thirdProductList[0].productItems[2]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onThirdPanSlider" index="02" product="{{ thirdProductList[0].productItems[2] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="11" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ thirdProductList[0].productItems[2]._productImageList[0] ? thirdProductList[0].productItems[2]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!thirdProductList[0].productItems[2]._productIsFresh && thirdProductList[0].productItems[2]._typeOfProduct != 'favorite') && (thirdProductList[0].productItems[2]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ thirdProductList[0].productItems[2]._quantity <= 99 ? thirdProductList[0].productItems[2]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ thirdProductList[0].productItems[2]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ thirdProductList[0].productItems[2]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ thirdProductList[0].productItems[2]._typeOfProduct != 'favorite' && thirdProductList[0].productItems[2]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ thirdProductList[0].productItems[2]._productFinalPrice != thirdProductList[0].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ thirdProductList[0].productItems[2]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ thirdProductList[0].productItems[2]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ thirdProductList[0].productItems[2]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ thirdProductList[0].productItems[2]._productFinalPrice == thirdProductList[0].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ thirdProductList[0].productItems[2]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ thirdProductList[0].productItems[2]._lastPriceDisplay  }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>    
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+            <!-- thirdProductList[1] -->
+            <GridLayout visibility="{{ (thirdProductList[1] && thirdProductList[1].productItems.length != 0) ? 'visible' : 'collapsed' }}" row="5" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="3" col="0">
+                <Image  src="res://shelf" row="7" rowSpan="4" col="0" 
+               visibility="{{ ( thirdProductList[1].productItems[0] && thirdProductList[1].productItems[0]._productId ) || (thirdProductList[1].productItems[1] && thirdProductList[1].productItems[1]._productId )|| (thirdProductList[1].productItems[2] && thirdProductList[1].productItems[2]._productId ) ? 'visible' : 'collapsed' }}"/>
+                <GridLayout rows="*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="16">
+                    <!-- product 1 -->
+                    <GridLayout visibility="{{ thirdProductList[1].productItems[0]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onThirdPanSlider" index="10" product="{{ thirdProductList[1].productItems[0] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="1" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ thirdProductList[1].productItems[0]._productImageList[0] ? thirdProductList[1].productItems[0]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!thirdProductList[1].productItems[0]._productIsFresh && thirdProductList[1].productItems[0]._typeOfProduct != 'favorite') && (thirdProductList[1].productItems[0]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ thirdProductList[1].productItems[0]._quantity <= 99 ? thirdProductList[1].productItems[0]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ thirdProductList[1].productItems[0]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ thirdProductList[1].productItems[0]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ thirdProductList[1].productItems[0]._typeOfProduct != 'favorite' && thirdProductList[1].productItems[0]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ thirdProductList[1].productItems[0]._productFinalPrice != thirdProductList[1].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ thirdProductList[1].productItems[0]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ thirdProductList[1].productItems[0]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ thirdProductList[1].productItems[0]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ thirdProductList[1].productItems[0]._productFinalPrice == thirdProductList[1].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ thirdProductList[1].productItems[0]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ thirdProductList[1].productItems[0]._lastPriceDisplay  }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>       
+                    </GridLayout>
+                    <!-- product 2 -->
+                    <GridLayout visibility="{{ thirdProductList[1].productItems[1]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onThirdPanSlider" index="11" product="{{ thirdProductList[1].productItems[1] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="6" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ thirdProductList[1].productItems[1]._productImageList[0] ? thirdProductList[1].productItems[1]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!thirdProductList[1].productItems[1]._productIsFresh && thirdProductList[1].productItems[1]._typeOfProduct != 'favorite') && (thirdProductList[1].productItems[1]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ thirdProductList[1].productItems[1]._quantity <= 99 ? thirdProductList[1].productItems[1]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ thirdProductList[1].productItems[1]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ thirdProductList[1].productItems[1]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ thirdProductList[1].productItems[1]._typeOfProduct != 'favorite' && thirdProductList[1].productItems[1]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ thirdProductList[1].productItems[1]._productFinalPrice != thirdProductList[1].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{  thirdProductList[1].productItems[1]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ thirdProductList[1].productItems[1]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ thirdProductList[1].productItems[1]._productPercentPrice}}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ thirdProductList[1].productItems[1]._productFinalPrice == thirdProductList[1].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{thirdProductList[1].productItems[1]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ thirdProductList[1].productItems[1]._lastPriceDisplay  }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>     
+                    </GridLayout>
+                    <!-- product 3 -->
+                    <GridLayout visibility="{{ thirdProductList[1].productItems[2]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onThirdPanSlider" index="12" product="{{ thirdProductList[1].productItems[2] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="11" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ thirdProductList[1].productItems[2]._productImageList[0] ? thirdProductList[1].productItems[2]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!thirdProductList[1].productItems[2]._productIsFresh && thirdProductList[1].productItems[2]._typeOfProduct != 'favorite') && (thirdProductList[1].productItems[2]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ thirdProductList[1].productItems[2]._quantity <= 99 ? thirdProductList[1].productItems[2]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ thirdProductList[1].productItems[2]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ thirdProductList[1].productItems[2]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ thirdProductList[1].productItems[2]._typeOfProduct != 'favorite' && thirdProductList[1].productItems[2]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ thirdProductList[1].productItems[2]._productFinalPrice != thirdProductList[1].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{  thirdProductList[1].productItems[2]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ thirdProductList[1].productItems[2]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ thirdProductList[1].productItems[2]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ thirdProductList[1].productItems[2]._productFinalPrice == thirdProductList[1].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ thirdProductList[1].productItems[2]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ thirdProductList[1].productItems[2]._lastPriceDisplay   }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>       
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+            <!-- thirdProductList[2] -->
+            <GridLayout visibility="{{ (thirdProductList[2] && thirdProductList[2].productItems.length != 0) ? 'visible' : 'collapsed' }}" row="9" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="3" col="0">
+                <Image  src="res://shelf"  row="7" rowSpan="4" col="0" 
+                 visibility="{{ ( thirdProductList[2].productItems[0] && thirdProductList[2].productItems[0]._productId ) || (thirdProductList[2].productItems[1] && thirdProductList[2].productItems[1]._productId )|| (thirdProductList[2].productItems[2] && thirdProductList[2].productItems[2]._productId ) ? 'visible' : 'collapsed' }}"/>
+                <GridLayout rows="*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" rowSpan="16">
+                    <!-- product 1 -->
+                    <GridLayout visibility="{{ thirdProductList[2].productItems[0]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onThirdPanSlider" index="20" product="{{ thirdProductList[2].productItems[0] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="1" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ thirdProductList[2].productItems[0]._productImageList[0] ? thirdProductList[2].productItems[0]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!thirdProductList[2].productItems[0]._productIsFresh && thirdProductList[2].productItems[0]._typeOfProduct != 'favorite') && (thirdProductList[2].productItems[0]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ thirdProductList[2].productItems[0]._quantity <= 99 ? thirdProductList[2].productItems[0]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ thirdProductList[2].productItems[0]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ thirdProductList[2].productItems[0]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ thirdProductList[2].productItems[0]._typeOfProduct != 'favorite' && thirdProductList[2].productItems[0]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ thirdProductList[2].productItems[0]._productFinalPrice != thirdProductList[2].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{   thirdProductList[2].productItems[0]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ thirdProductList[2].productItems[0]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ thirdProductList[2].productItems[0]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ thirdProductList[2].productItems[0]._productFinalPrice == thirdProductList[2].productItems[0]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{  thirdProductList[2].productItems[0]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ thirdProductList[2].productItems[0]._lastPriceDisplay   }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>   
+                    </GridLayout>
+                    <!-- product 2 -->
+                    <GridLayout visibility="{{ thirdProductList[2].productItems[1]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onThirdPanSlider" index="21" product="{{ thirdProductList[2].productItems[1] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="6" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ thirdProductList[2].productItems[1]._productImageList[0] ? thirdProductList[2].productItems[1]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!thirdProductList[2].productItems[1]._productIsFresh && thirdProductList[2].productItems[1]._typeOfProduct != 'favorite') && (thirdProductList[2].productItems[1]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ thirdProductList[2].productItems[1]._quantity <= 99 ? thirdProductList[2].productItems[1]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ thirdProductList[2].productItems[1]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ thirdProductList[2].productItems[1]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ thirdProductList[2].productItems[1]._typeOfProduct != 'favorite' && thirdProductList[2].productItems[1]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                        visibility="{{ thirdProductList[2].productItems[1]._productFinalPrice != thirdProductList[2].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{ thirdProductList[2].productItems[1]._firstPriceDisplay}}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{ thirdProductList[2].productItems[1]._lastPriceDisplay  }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ thirdProductList[2].productItems[1]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ thirdProductList[2].productItems[1]._productFinalPrice == thirdProductList[2].productItems[1]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{  thirdProductList[2].productItems[1]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ thirdProductList[2].productItems[1]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>  
+                    </GridLayout>
+                    <!-- product 3 -->
+                    <GridLayout visibility="{{ thirdProductList[2].productItems[2]._productId  ? 'visible' : 'collapsed' }}"   tap="onTapProduct" longPress="onTapProductDetails"   pan="onThirdPanSlider" index="22" product="{{ thirdProductList[2].productItems[2] }}" columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" col="11" colSpan="4">
+                        <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto">
+                            <StackLayout row="0" colSpan="2">
+                                <i:ImageCacheIt stretch="aspectFit" id="image" imageUri="{{ thirdProductList[2].productItems[2]._productImageList[0] ? thirdProductList[2].productItems[2]._productImageList[0] : '~/images/no_image.jpg'  }}"/>
+                            </StackLayout>
+                            <GridLayout rows="*,*,*" height="100%"
+                            style="text-align: center; vertical-align: middle;" 
+                            row="0" col="1"> 
+                                <StackLayout 
+                                    style="vertical-align: middle" visibility="{{ (!thirdProductList[2].productItems[2]._productIsFresh && thirdProductList[2].productItems[2]._typeOfProduct != 'favorite') && (thirdProductList[2].productItems[2]._quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                                    <Label text="9" row="0" col="0" backgroundColor="red"
+                                        
+                                        width="20"
+                                        height="20"
+                                        borderRadius="10" 
+                                        text="{{ thirdProductList[2].productItems[2]._quantity <= 99 ? thirdProductList[2].productItems[2]._quantity : '99+' }}"
+                                        style="vertical-align: middle"
+                                        fontSize="8" 
+                                        color="white" />
+                                </StackLayout>
+                                <Label visibility="{{ thirdProductList[2].productItems[2]._typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" favoriteId="{{ thirdProductList[2].productItems[2]._productFavoriteId }}" tap="onTapFavoriteIcon" height="30" width="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+                                <Label visibility="{{ thirdProductList[2].productItems[2]._typeOfProduct != 'favorite' && thirdProductList[2].productItems[2]._productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout class="border-price-layout-one-mode" rows="3*,3*,*" columns="*" row="11" rowSpan="6" 
+                         visibility="{{ thirdProductList[2].productItems[2]._productFinalPrice != thirdProductList[2].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}" orientation="vertical" >
+                            <StackLayout width="100%" row="0" col="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center"> 
+                                <StackLayout  width="auto" >
+                                    <Label color="white" verticalAlignment="middle" text="{{  thirdProductList[2].productItems[2]._firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+                                </StackLayout>
+                                <StackLayout width="auto" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                    <Label color="white" text="{{  thirdProductList[2].productItems[2]._lastPriceDisplay }}"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/> 
+                                    <Label color="white" text="đ"  paddingLeft="3" 
+                                    class="small-price-layout-one-mode"/>
+                                </StackLayout>
+                            </StackLayout> 
+                            <StackLayout width="100%" verticalAlignment="top" row="1" height="100%" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+                                <Label text="{{ thirdProductList[2].productItems[2]._productPercentPrice }}" color="#000" textWrap="true" fontWeight="Bold"
+                                class="percent-price-layout-one-mode raleway"/>
+                                <Label text=" đ" textWrap="true" color="#666666"
+                                class="percent-price-layout-one-mode raleway"/>
+                            </StackLayout>   
+                        </GridLayout>
+
+                        <GridLayout row="11" rowSpan="6" width="100%" rows="3*,3*,*" color="white" 
+                        visibility="{{ thirdProductList[2].productItems[2]._productFinalPrice == thirdProductList[2].productItems[2]._productOriginalPrice ? 'visible' : 'hidden' }}">
+                            <StackLayout width="100%" class="border-price-layout-one-mode" backgroundColor="#EC0677"  orientation="horizontal" horizontalAlignment="center" 
+                            col="0" row="0" rowSpan="2">
+                                <StackLayout verticalAlignment="middle">
+                                    <Label color="white" text="{{ thirdProductList[2].productItems[2]._firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                                <StackLayout orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                                        <Label color="white" text="{{ thirdProductList[2].productItems[2]._lastPriceDisplay }}"
+                                        class="small-price-layout-no-percent-one-mode"/> 
+                                        <Label color="white" text="đ"
+                                        class="small-price-layout-no-percent-one-mode"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>  
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+        </GridLayout>
+    </GridLayout>
+</GridLayout> 

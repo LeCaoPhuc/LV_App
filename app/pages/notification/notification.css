@@ -1,0 +1,20 @@
+.notification-item {
+    padding-top: 10;
+    padding-left: 10;
+    padding-right: 10;
+}
+.notification-title {
+    color: #812092;
+    font-size: 15;
+}
+.notification-content {
+    color: #888888;
+    margin-top: 10;
+    padding-left: 10;
+}
+.notification-time {
+    color: #888888;
+    margin-top: 10;
+    margin-bottom: 10;
+    padding-left: 10;
+}

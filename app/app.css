@@ -1,0 +1,17 @@
+@import './app.common.css';
+
+.input-border {    
+    border-bottom-width: 1px;
+    border-color: #808080;
+    border-style: solid;
+    margin-top: 10;
+}
+
+.input-border-error{
+    margin-top: 10;
+} 
+
+.text-label{
+    margin-top: 7;
+    margin-bottom: -5;
+}

@@ -1,0 +1,95 @@
+.list-view {
+    width: 100%;
+    height: 100%;
+}
+.profile-layout {
+    border-bottom-width: 2px;
+    border-bottom-color: #8c8c8c;
+    border-bottom-style: solid;
+    /* margin: 10 0 10 0;
+    padding-bottom: 10; */
+}
+
+.profile-layout .avatar{
+     margin: 0 10 0 10; 
+    border-width: 1px;
+    border-color: #ccc;
+    border-radius: 100;
+}
+
+.search-suggest-list{
+    border-bottom-width: 1;
+    border-bottom-color: #ccc;
+    border-bottom-style: solid;
+    vertical-align: middle;
+    padding-left: 20;
+}
+
+/* product item css */
+
+.border-price-layout-one-mode{
+    text-align: center;
+    border-radius: 10,0,0,0
+}
+.border-price-layout-four-mode{
+    text-align: center;
+    border-radius: 5,0,0,0
+}
+.border-price-layout-nine-mode{
+    text-align: center;
+    border-radius: 3,0,0,0;
+}
+
+.big-price-layout-one-mode{
+    vertical-align: middle; 
+    text-align: right; 
+    font-weight: bold;
+    font-size: 18;
+}
+.big-price-layout-four-mode{
+    vertical-align: middle; 
+    text-align: right; 
+    font-weight: bold;
+    font-size: 9;
+}
+.big-price-layout-nine-mode{
+    vertical-align: middle; 
+    text-align: right; 
+    font-weight: bold;
+    font-size: 4;
+}
+.big-price-layout-no-percent-one-mode{
+    vertical-align: middle; 
+    text-align: right; 
+    font-weight: bold;
+    font-size: 24;
+}
+.small-price-layout-one-mode{
+    font-weight:bold;
+    font-size: 6;
+}
+.small-price-layout-four-mode{
+    font-weight:bold;
+    font-size: 3;
+}
+.small-price-layout-nine-mode{
+    font-weight:bold;
+    font-size: 1;
+}
+.small-price-layout-no-percent-one-mode{
+    font-weight:bold;
+    font-size: 8;
+}
+
+.percent-price-layout-one-mode{
+    text-decoration: line-through;
+    font-size: 12;
+}
+.percent-price-layout-four-mode{
+   text-decoration: line-through;
+    font-size: 6;
+}
+.percent-price-layout-nine-mode{
+    text-decoration: line-through;
+    font-size: 3 ;
+}

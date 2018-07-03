@@ -1,0 +1,20 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" shownModally="onShownModally" loaded="onLoaded" actionBarHidden="true"
+    width="{{screenWidth}}">
+
+    <GridLayout rows="*">
+        <Placeholder row="0" creatingView="creatingView" />
+        <Label text="Vui lòng để camera của điện thoại cách mã vạch sản phẩm từ 20-30cm" textWrap="true" class="text-center m-y-10"
+            marginTop="40" color="white" verticalAlignment="top"></Label>
+        <StackLayout row="0" orientation="horizontal" height="50" verticalAlignment="bottom" marginBottom="10">
+            <StackLayout width="60%" horizontalAlignment="left">
+                <Button height="40" fontSize="15" text="{{buttonMaunalText}}" tap="goBackAndTypeBarCode" horizontalAlignment="center" borderRadius="5"
+                    color="white" backgroundColor="#F44336" class="btn-active p-x-15"></Button>
+            </StackLayout>
+            <StackLayout width="40%" horizontalAlignment="right">
+                <Button height="40" fontSize="15" text="Đóng" tap="goBack" horizontalAlignment="center" borderRadius="5" color="white"
+                    backgroundColor="#3F4050" class="btn-active p-x-20"></Button>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout id="redLine" row="0" verticalAlignment="center" class="red-line"></StackLayout>
+    </GridLayout>
+</Page>

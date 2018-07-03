@@ -1,0 +1,22 @@
+@import './app.common.css';
+
+Button {
+    text-transform: none;
+}
+
+.text-error{
+    margin-bottom: 0; 
+}
+
+Page .input-border{
+    padding-bottom: 11; 
+}
+
+Page .input-border-error{
+    padding-bottom: 11; 
+}
+
+TextField {
+    padding-left: 5;
+    padding-right: 5;
+}

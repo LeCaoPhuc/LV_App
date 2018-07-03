@@ -1,0 +1,36 @@
+<GridLayout  rows="50" columns="40,*,40" class="action-bar" loaded="onLoaded">
+    <StackLayout  id="menuLeft" height="40" width="40"  col="0" style="text-align: center" tap="{{ openSideBar }}" verticalAlignment="middle" visibility="{{ displayActionBar.actionBarStyle!=4 ? 'visible' : 'collapsed' }}">
+        <Image stretch="aspectFit" src="res://icon_user"/>
+    </StackLayout>
+
+    <StackLayout col="1" verticalAlignment="middle"  width="100%">
+        <!-- homepage -->
+        <StackLayout orientation="horizontal" id="isHome" style="text-align: center" width="100%" horizontalAlignment="center" visibility="{{ displayActionBar.actionBarStyle==1 ? 'visible' : 'collapse' }}">
+            <Label text="HANDMADE" textWrap="true"  class="quick-sand" verticalAlignment="middle"  fontSize="25"/>
+            <!-- <Label text=" & " textWrap="true" fontSize="16" verticalAlignment="middle" paddingTop="5"  class="quick-sand"/> -->
+            <!-- <Label  text="Scan" class="quick-sand" fontSize="25" verticalAlignment="middle"  textWrap="true" /> -->
+        </StackLayout>
+        <!-- category -->
+            <StackLayout id="isCategory" visibility="{{ displayActionBar.actionBarStyle==2 ? 'visible' : 'collapsed' }}" height="100%" color="white" 
+                tap="{{ onTapMenuHome }}" 
+                orientation="horizontal" 
+                horizontalAlignment="center" 
+                paddingRight="5">
+                <StackLayout width="40" verticalAlignment="middle" horizontalAlignment="center" tap="{{ onTapMenuHome }}">
+                    <Label id="menuHome"  text="&#xf0c9;" fontSize="18" class="fa" width="40" style="text-align: center;"  verticalAlignment="middle" textWrap="true"/>
+                </StackLayout>
+                <StackLayout id="scrollViewTitleActionBarStyle2" verticalAlignment="middle" >
+                    <Placeholder id="titleActionBarStyle2" width="100%" height="100%" text="{{ displayActionBar.titleActionBar}}" style="text-align: center;" fontSize="18" creatingView="onTitleCreatingView"/>
+                </StackLayout>
+            </StackLayout>  
+        <!-- optional -->
+    </StackLayout>
+
+    <StackLayout col="0" colSpan="3" id="isOptional" visibility="{{ displayActionBar.actionBarStyle==4 ? 'visible' : 'collapsed' }}">
+        <SearchBar id="searchBar" hint="Search" color="#000" text="" clear="onClear" submit="{{ onSubmit }}" loaded="onSearchBarLoaded"/>
+    </StackLayout>
+    
+    <StackLayout  id="menuSearch" width="40"  col="2"  style="text-align: center" tap="onSearchTap" verticalAlignment="middle" visibility="{{ displayActionBar.actionBarStyle!=4 ? 'visible' : 'collapsed' }}">
+        <Image stretch="aspectFit" src="res://icon_search"/>
+    </StackLayout>
+</GridLayout>

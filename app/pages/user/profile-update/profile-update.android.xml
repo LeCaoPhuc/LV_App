@@ -1,0 +1,84 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="page" loaded="{{onLoaded}}" actionBarHidden="true">
+    <StackLayout>
+        <GridLayout rows="*" orientation="horizontal" width="100%" height="60" class="action-bar p-10">
+            <Label row="0" text="Thông tin cá nhân" id="textTitle" textWrap="true" color="white" class="text-center" fontSize="20" verticalAlignment="center"></Label>
+            <StackLayout row="0" col="0" tap="{{ goBack }}" horizontalAlignment="left" width="15%" height="50" verticalAlignment="center">
+                <Label text="&#xf104;" style="font-size: 35" class="fa" color="white" horizontalAlignment="left" tap="{{ goBack }}"></Label>
+            </StackLayout>
+            <StackLayout row="0" width="20%" horizontalAlignment="right" verticalAlignment="center" tap="{{ updateProfile }}">
+                <Label text="Lưu" textWrap="true" color="white" class="text-right" fontSize="18" marginRight="10"></Label>
+            </StackLayout>
+        </GridLayout>
+
+        <DockLayout rows="auto, auto, auto, auto, auto" stretchLastChild="false" height="100%">
+            <GridLayout row="0" dock="top" rows="auto" columns="auto, *">
+                <GridLayout rows="auto" columns="*" colSpan="2">
+                    <Image src="{{avatar ? avatar : ''}}" stretch="aspectFill" height="170" id="avatarBackground" />
+                    <GridLayout columns="*" rows="*" backgroundColor="rgba(0,0,0,0.7)"></GridLayout>
+                </GridLayout>
+                <Image row="0" col="0" src="{{avatar ? avatar : 'res://icon_user'}}" width="130" height="130" class="avatar m-10" id="avatar"
+                    tap="{{changeImage}}" />
+                <StackLayout row="0" col="1" orientation="horizontal" verticalAlignment="center" class="m-r-10">
+                    <!--Frist Name-->
+                    <StackLayout width="45%">
+                        <TextField text="{{ profileConfig.lastName.value }}" hint="{{ profileConfig.lastName.placeHolder }}" id="{{ profileConfig.lastName.id }}"
+                            blur="{{checkInput}}" class="{{profileConfig.lastName.messageError != ' ' ? 'input-border-error' : 'input-border' }}"
+                            color="white" loaded="onTextFieldLoaded"></TextField>
+                        <Label text="{{ profileConfig.lastName.messageError }}" class="text-error" textWrap="true" color="red" fontSize="14"></Label>
+                    </StackLayout>
+                    <!--Last Name-->
+                    <StackLayout width="45%" marginLeft="10%">
+                        <TextField text="{{ profileConfig.firstName.value }}" hint="{{ profileConfig.firstName.placeHolder }}" id="{{ profileConfig.firstName.id }}"
+                            blur="{{checkInput}}" class="{{profileConfig.firstName.messageError != ' ' ? 'input-border-error' : 'input-border' }}"
+                            color="white" loaded="onTextFieldLoaded"></TextField>
+                        <Label text="{{ profileConfig.firstName.messageError }}" class="text-error" textWrap="true" color="red" fontSize="14"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </GridLayout>
+            <ScrollView loaded="srollViewLoaded">
+                <GridLayout row="1" rows="auto, auto, auto, auto, auto" columns="auto, *" class="user-layout m-x-10" marginTop="10">
+                    <Label row="0" col="0" text="{{profileConfig.email.label + ': '}}" textWrap="true" paddingTop="20" verticalAlignment="top"
+                        color="{{profileConfig.email.messageError != ' ' ? 'red' : 'black'}}"></Label>
+
+                    <StackLayout row="0" col="1" class="m-t-10">
+                        <TextField text="{{ profileConfig.email.value }}" hint="{{ profileConfig.email.placeHolder }}" id="{{ profileConfig.email.id }}"
+                            blur="{{checkInput}}" class="{{profileConfig.email.messageError != ' ' ? 'input-border-error' : 'input-border' }}"
+                            autocapitalizationType="none" keyboardType="email" ></TextField>
+                        <Label text="{{ profileConfig.email.messageError }}" class="text-error" textWrap="true"></Label>
+                    </StackLayout>
+
+                    <Label row="1" col="0" text="{{profileConfig.phoneNumber.label + ': '}}" textWrap="true" paddingTop="20" verticalAlignment="top"
+                        color="{{profileConfig.phoneNumber.messageError != ' ' ? 'red' : 'black'}}"></Label>
+
+                    <StackLayout row="1" col="1" class="m-t-10">
+                        <TextField text="{{ profileConfig.phoneNumber.value }}" hint="{{ profileConfig.phoneNumber.placeHolder }}" id="{{ profileConfig.phoneNumber.id }}"
+                            blur="{{checkInput}}" class="{{profileConfig.phoneNumber.messageError != ' ' ? 'input-border-error' : 'input-border' }}" keyboardType="phone"></TextField>
+                        <Label text="{{ profileConfig.phoneNumber.messageError }}" class="text-error" textWrap="true"></Label>
+                    </StackLayout>
+
+                    <Label row="2" col="0" text="Giới tính: " textWrap="true" marginTop="20"></Label>
+
+                    <GridLayout row="2" col="1" rows="auto" columns="auto,auto" marginTop="20">
+                        <StackLayout row="0" col="0" orientation="horizontal" width="40%" marginLeft="10" id="male" tap="{{onChooseGenderTap}}">
+                            <Label text="{{ (gender == 'male') ? '&#xf192;' : '&#xf1db;'}}" class="fa m-r-10" color="#8c8c8c" textWrap="true"></Label>
+                            <Label text="Nam" textWrap="true"></Label>
+                        </StackLayout>
+                        <StackLayout row="0" col="1" orientation="horizontal" id="female" tap="{{onChooseGenderTap}}">
+                            <Label text="{{ (gender == 'female') ? '&#xf192;' : '&#xf1db;'}}" class="fa m-r-10" color="#8c8c8c" textWrap="true"></Label>
+                            <Label text="Nữ" textWrap="true"></Label>
+                        </StackLayout>
+                    </GridLayout>
+
+                    <Label row="3" col="0" text="Địa chỉ: " textWrap="true" paddingTop="22" verticalAlignment="top" height="70"></Label>
+
+                    <TextView row="3" col="1" id="addressTextView" hint="Địa chỉ" text="{{address}}" marginTop="13" height="70" editable="true"
+                        fontSize="17" style="border-bottom-width: 1" borderColor="#ccc"></TextView>
+
+                    <Button row="4" col="0" colSpan="2" dock="bottom" text="Đổi mật khẩu" backgroundColor="#812092" color="white" width="80%"
+                        verticalAlignment="bottom" marginTop="10" tap="{{onChangePasswordTap}}" class="btn"></Button>
+                </GridLayout>
+            </ScrollView>
+        </DockLayout>
+
+    </StackLayout>
+</Page>

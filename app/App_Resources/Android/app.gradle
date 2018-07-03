@@ -1,0 +1,39 @@
+// Add your native dependencies here:
+
+// Uncomment to add recyclerview-v7 dependency
+//dependencies {
+//	compile 'com.android.support:recyclerview-v7:+'
+//}
+
+android {  
+   aaptOptions {
+      cruncherEnabled false
+  }
+  defaultConfig {  
+    generatedDensities = []
+    applicationId = "com.nativescript.handmademarket"  
+    manifestPlaceholders = [
+      onesignal_app_id: "954d8bdf-7630-43a7-b39e-3005fe007676",
+      onesignal_google_project_number: "110169118967"
+    ]
+  }  
+  aaptOptions {  
+    additionalParameters "--no-version-vectors"  
+  }  
+} 
+buildscript {
+    repositories {
+        jcenter()
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.0'
+    }
+}
+dependencies {
+  compile 'com.journeyapps:zxing-android-embedded:3.5.0'
+  compile 'com.onesignal:OneSignal:3.+@aar'
+  compile 'com.google.android.gms:play-services-gcm:+'
+  compile 'com.google.android.gms:play-services-location:+'
+  compile 'com.github.d-max:spots-dialog:0.7@aar'
+}

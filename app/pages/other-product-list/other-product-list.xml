@@ -1,0 +1,30 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" loaded="onLoaded" actionBarHidden="true"
+    xmlns:lv="nativescript-telerik-ui/listview" xmlns:nsDrawer="nativescript-telerik-ui/sidedrawer" xmlns:sideBar="shared/components/side-bar-content"
+    xmlns:actionBar="shared/components/action-bar-back" xmlns:product="shared/components/product-item" xmlns:departmentStore="shared/components/department-store"
+    xmlns:cart="shared/components/cart" xmlns:departmentSlider="shared/components/department-slider" xmlns:i="nativescript-image-cache-it">>
+    <GridLayout row="auto" id="productListLayout">
+        <DockLayout row="0" id="sliderView" pan="{{ onPanSliderView }}" backgroundImage="res://background_shelf" stretchLastChild="false">
+            <StackLayout dock="top">
+                <actionBar:action-bar-back id="actionBar"></actionBar:action-bar-back>
+            </StackLayout>
+            <StackLayout height="75" dock="bottom" visibility="{{ !isEmptyProductList ? 'hidden' : 'collapsed' }}">
+
+            </StackLayout>
+            <GridLayout rows="*,2*,3*" col="*" visibility="{{ isEmptyProductList ? 'visible' : 'collapsed' }}" backgroundColor="white"
+                height="100%" width="100%">
+                <StackLayout row="1" col="0">
+                    <i:ImageCacheIt height="100" width="100" stretch="aspectFit" imageUri="res://wishlist_empty" />
+                    <Label horizontalAlignment="center" color="#005dab" paddingTop="5" text="Sản phẩm yêu thích trống" textWrap="true" />
+                </StackLayout>
+            </GridLayout>
+            <departmentSlider:department-slider visibility="{{ !isEmptyProductList ? 'visible' : 'collapsed' }}" id="departmentSlider"></departmentSlider:department-slider>
+        </DockLayout>
+        <!-- <StackLayout visibility="{{ !isEmptyProductList ? 'visible' : 'collapsed' }}" > -->
+        <cart:cart row="0" id="cart" showBtnGroup="false" showBtnScan="true" style="z-index: 0" visibility="hidden"></cart:cart>
+        <!-- </StackLayout> -->
+        <StackLayout id="confirmAddProductToCart" height="75" style="width: 20%" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0)"
+            visibility="collapse" marginBottom="40" style="z-index: 2">
+            <Image row="0" col="2" stretch="aspectFit" src="res://icon_confirm" />
+        </StackLayout>
+    </GridLayout>
+</Page>

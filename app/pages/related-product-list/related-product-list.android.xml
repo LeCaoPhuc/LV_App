@@ -1,0 +1,54 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" loaded="onLoaded" actionBarHidden="true"
+    xmlns:lv="nativescript-telerik-ui/listview" xmlns:nsDrawer="nativescript-telerik-ui/sidedrawer" xmlns:sideBar="shared/components/side-bar-content"
+    xmlns:actionBar="shared/components/action-bar-back" xmlns:product="shared/components/product-item" xmlns:departmentStore="shared/components/department-store"
+    xmlns:cart="shared/components/cart" xmlns:departmentSlider="shared/components/department-slider" xmlns:i="nativescript-image-cache-it">>
+    <GridLayout row="auto" id="productListLayout">
+        <DockLayout row="0" id="sliderView" pan="{{ onPanSliderView }}" backgroundImage="res://background_shelf" stretchLastChild="false">
+            <StackLayout dock="top">
+                <GridLayout rows="50" id="actionBar" columns="40,*,40" class="action-bar">
+                    <StackLayout row="0" tap="{{ goBack }}" horizontalAlignment="left" width="15%" height="50">
+                        <Button text="&#xf104;" style="font-size: 35" class="fa" color="white" horizontalAlignment="left" tap="{{ goBack }}" />
+                    </StackLayout>
+                    <StackLayout col="1" verticalAlignment="middle">
+                        <Label text="{{ actionBarTitle }}" id="textTitle" textWrap="true" color="white" class="text-center" fontSize="18" loaded="onTitleCreatingView"></Label>
+                    </StackLayout>
+                    <StackLayout height="40" width="40" id="menuSearch" col="2" style="text-align: center" verticalAlignment="middle" tap="{{ onSearchTap }}"
+                        visibility="{{ displayActionBar.actionBarStyle!=4 ? 'visible' : 'collapsed' }}">
+                        <i:ImageCacheIt stretch="fill" imageUri="res://icon_search" />
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+            <GridLayout id="cart-icon" dock="bottom" backgroundColor="rgba(0,0,0,0)" rows="15,10,40,10" columns="*,*,*,*,*,*,*,*,*,*,*,*">
+                <StackLayout col="0" row="2" colSpan="2" tap="{{ onTapShowManyScreen }}" style="z-index: 0" visibility="collapse">
+                    <i:ImageCacheIt stretch="aspectFit" imageUri="res://group_product_3_3" />
+                </StackLayout>
+                <GridLayout rows="25,*" columns="*" row="0" rowSpan="4" col="2" colSpan="8" onPan="{{ onPanCart }}">
+                    <StackLayout row="0" col="0" horizontalAlignment="center" verticalAlignment="center" marginBottom="5">
+                        <i:ImageCacheIt width="10" height="10" stretch="aspectFit" imageUri="res://icon_double_arrow_up" />
+                    </StackLayout>
+                    <StackLayout row="1" col="0" verticalAlignment="bottom" orientation="vertical">
+                        <i:ImageCacheIt verticalAlignment="bottom" stretch="aspectFill" imageUri="res://icon_cart" />
+                    </StackLayout>
+                </GridLayout>
+
+                <StackLayout col="10" row="2" colSpan="2" tap="{{ onTapScanBarcode }}" style="z-index: 0">
+                    <i:ImageCacheIt stretch="aspectFit" imageUri="res://scan_barcode" />
+                </StackLayout>
+            </GridLayout>
+            <GridLayout rows="*,2*,3*" col="*" visibility="{{ isEmptyProductList ? 'visible' : 'collapsed' }}" backgroundColor="white"
+                height="100%" width="100%">
+                <StackLayout row="1" col="0">
+                    <i:ImageCacheIt height="100" width="100" stretch="aspectFit" imageUri="res://wishlist_empty" />
+                    <Label horizontalAlignment="center" color="#005dab" paddingTop="5" text="Sản phẩm yêu thích trống" textWrap="true" />
+                </StackLayout>
+            </GridLayout>
+            <departmentSlider:department-slider visibility="{{ !isEmptyProductList ? 'visible' : 'collapsed' }}" id="departmentSlider"></departmentSlider:department-slider>
+        </DockLayout>
+        <cart:cart row="0" id="cart" showBtnGroup="false" showBtnScan="true" visibility="{{ !isEmptyProductList ? 'visible' : 'collapsed' }}"
+            style="z-index: 0"></cart:cart>
+        <StackLayout id="confirmAddProductToCart" height="75" style="width: 20%" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0)"
+            visibility="collapse" marginBottom="40" style="z-index: 2">
+            <Image row="0" col="2" stretch="aspectFit" src="res://icon_confirm" />
+        </StackLayout>
+    </GridLayout>
+</Page>

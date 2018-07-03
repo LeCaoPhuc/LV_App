@@ -1,0 +1,68 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" shownModally="onShownModally" loaded="onLoaded" actionBarHidden="true"
+    xmlns:ns="nativescript-carousel" xmlns:i="nativescript-image-cache-it" backgroundColor="rgba(0,0,0,0.5)" xmlns:dd="nativescript-drop-down">
+    <StackLayout backgroundColor="white" class="modal-layout" style="border-radius: 5; ">
+        <DockLayout stretchLastChild="true" height="100%">
+            <StackLayout dock="top">
+                <GridLayout rows="auto, auto, auto, auto" columns="auto">
+                    <GridLayout row="0" rows="auto" columns="*,*,*" width="100%" verticalAlignment="top">
+                        <!-- <StackLayout horizontalAlignment="left" marginLeft="15" height="50" verticalAlignment="center">
+                                    <Label text="&#xf155;ale  " textWrap="true" class="fa" color="#FF5B55" fontSize="20" verticalAlignment="center"></Label>
+                                </StackLayout> -->
+                        <dd:DropDown row="0" col="1" colSpan="2" verticalAlignment="center" id="dropDown" items="{{arrayType}}" hint="sdfsdfsdfsfd"
+                            selectedIndex="0" class="drop-down" selectedIndexChanged="{{dropDownTypeProductChanged}}" horizontalAlignment="left" visibility="{{arrayType && arrayType.length > 0 ? 'visible' : 'collapsed'}}"></dd:DropDown>
+                        <StackLayout row="0" col="2" width="100%" verticalAlignment="center">
+                            <StackLayout tap="goBack" horizontalAlignment="right" width="50" height="50" verticalAlignment="center">
+                                <Image stretch="fill" resize="300, 300" width="15" height="15" src="res://icon_delete" verticalAlignment="center" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <StackLayout row="1" width="200" height="200" marginTop="5">
+                        <Image src="{{imageUrl + '.png'}}" width="200" height="200" stretch="aspectFit" visibility="{{ imageUrl ? 'visible' : 'collapsed'}}"
+                        />
+                        <StackLayout visibility="{{ !imageUrl ? 'visible' : 'collapsed'}}" width="100%" height="120" verticalAlignment="center">
+                            <Label text="Chưa có hình ảnh cho sản phẩm này" textWrap="true" verticalAlignment="center" horizontalAlginment="center"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <Label row="2" text="{{productName}}" horizontalAlignment="center" fontSize="23" class="m-y-5" color="#005dab" textWrap="true"></Label>
+                    <StackLayout row="3" borderColor="#ccc" style="border-bottom-width: 1" marginLeft="5%" marginRight="5%"></StackLayout>
+                </GridLayout>
+            </StackLayout>
+            <StackLayout dock="bottom">
+                <StackLayout orientation="horizontal" class="p-x-20 p-y-10" backgroundColor="black">
+                    <StackLayout horizontalAlignment="left" width="50%" verticalAlignment="center">
+                        <StackLayout horizontalAlignment="left">
+                            <Label color="white">
+                                <FormattedString>
+                                    <Span text="{{totalPrice.display}}" fontWeight="Bold" fontSize="20"></Span>
+                                    <Span text="đ" fontSize="15"></Span>
+                                </FormattedString>
+                            </Label>
+                            <Label text="{{originalPrice.display + 'đ'}}" fontSize="14" textWrap="true" color="#999999" textDecoration="line-through"
+                                class="text-left" visibility="{{totalPrice.value != originalPrice.value  ? 'visible' : 'collapsed'}}"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <GridLayout columns="auto, *, auto" rows="auto" width="100%" verticalAlignment="center">
+                        <StackLayout col="0" tap="{{onTapMinusButton}}" touch="{{onTouchChangeQuantityButton}}" typeButton="minius">
+                            <Image stretch="fill" resize="300, 300" width="30" height="30" src="res://icon_minus_gray" />
+                        </StackLayout>
+                        <StackLayout col="1" orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
+                            <Label text="{{ quantity }}" fontSize="20" textWrap="true" color="white" verticalAlignment="top"></Label>
+                        </StackLayout>
+                        <StackLayout col="2" tap="{{onTapPlusButton}}" touch="{{onTouchChangeQuantityButton}}" typeButton="plus">
+                            <Image stretch="fill" resize="300, 300" width="30" height="30" src="res://icon_plus_gray" />
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+                <StackLayout>
+                    <Button text="Thêm vào giỏ hàng" fontSize="18" tap="{{onAddToCartTap}}" paddingTop="15" paddingBottom="15" backgroundColor="#1565C0"
+                        color="white"></Button>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout verticalAlignment="{{description ? 'top' : 'center'}}">
+                <StackLayout class="p-x-10" marginTop="5">
+                    <Label text="{{description}}" textWrap="true" class="m-y-20 text-left"></Label>
+                </StackLayout>
+            </StackLayout>
+        </DockLayout>
+    </StackLayout>
+</Page>

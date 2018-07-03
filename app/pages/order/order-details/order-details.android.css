@@ -1,0 +1,7 @@
+Label {
+     font-family: 'Raleway-Regular', 'Raleway'; 
+}
+
+.content Label {
+    margin-top: 10;
+}

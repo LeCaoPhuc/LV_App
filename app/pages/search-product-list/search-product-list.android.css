@@ -1,0 +1,57 @@
+.list-view {
+    width: 100%;
+    height: 100%;
+}
+.profile-layout {
+    border-bottom-width: 2px;
+    border-bottom-color: #8c8c8c;
+    border-bottom-style: solid;
+    /* margin: 10 0 10 0;
+    padding-bottom: 10; */
+}
+
+.profile-layout .avatar{
+     margin: 0 10 0 10; 
+    border-width: 1px;
+    border-color: #ccc;
+    border-radius: 100;
+}
+
+.search-suggest-list{
+    border-bottom-width: 1;
+    border-bottom-color: #ccc;
+    border-bottom-style: solid;
+    vertical-align: middle;
+    padding-left: 20;
+}
+.border-price-layout-one-mode{
+    text-align: center;
+    /* border-radius: 10,0,0,0 */
+}
+
+.big-price-layout-one-mode{
+    vertical-align: top; 
+    text-align: right; 
+    font-weight: bold;
+    font-size: 12;
+}
+.big-price-layout-no-percent-one-mode{
+    vertical-align: middle; 
+    font-weight: bold;
+    font-size: 15;
+    color: #884dff;
+}
+.small-price-layout-one-mode{
+    font-weight:bold;
+    font-size: 6;
+}
+
+.small-price-layout-no-percent-one-mode{
+    font-weight:bold;
+    font-size: 6;
+}
+.percent-price-layout-one-mode{
+    text-decoration: line-through;
+    font-size: 10;
+    color: #884dff;
+}

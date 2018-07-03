@@ -1,0 +1,101 @@
+<StackLayout xmlns:i="nativescript-image-cache-it" backgroundColor="rgba(0,0,0,0)" loaded="onLoaded" xmlns:lv="nativescript-telerik-ui/listview"
+    xmlns:Gif="nativescript-gif" xmlns:Card="nativescript-cardview" class="cart-view">
+    <GridLayout id="cartViewHeader" backgroundColor="rgba(255,255,255,0)" rows="15,10,40,10" columns="*,*,*,*,*,*,*,*,*,*,*,*"
+        tap="onTapCartViewHeader">
+        <StackLayout id="btnPayment" col="0" row="2" colSpan="2" touch="{{ onCheckOutTouch }}" style="z-index: 0">
+            <Image stretch="aspectFit" src="res://icon_order"></Image>
+        </StackLayout>
+        <GridLayout rows="25,*" columns="*" row="0" rowSpan="4" col="2" colSpan="8">
+            <StackLayout row="0" col="0" horizontalAlignment="center" verticalAlignment="center" marginBottom="5" tap="closeCartView">
+                <Image id="iconArrow" width="10" height="10" stretch="aspectFit" src="res://icon_double_arrow_up"></Image>
+            </StackLayout>
+            <StackLayout row="1" col="0" verticalAlignment="bottom" orientation="vertical">
+                <Image verticalAlignment="bottom" stretch="aspectFill" src="res://icon_cart"></Image>
+            </StackLayout>
+        </GridLayout>
+        <StackLayout id="btnScan" col="10" row="2" colSpan="2" tap="{{ onTapScanBarcode }}" style="z-index: 0">
+            <Image stretch="aspectFit" src="res://scan_barcode"></Image>
+        </StackLayout>
+    </GridLayout>
+    <StackLayout backgroundColor="white" height="100%">
+        <StackLayout id="cartViewBodyTop" borderBottomWidth="1" borderColor="#cccccc">
+            <FlexboxLayout flexDirection="row" horizontalAlignment="center" class="p-t-10 p-b-5">
+                <Label row="0" col="0" text="Thành tiền: " fontSize="18" textWrap="true" class="raleway" fontWeight="500" color="#888" paddingTop="3"></Label>
+                <Label row="0" col="1" text="{{finalPrice.display}}" fontSize="22" textWrap="true" class="raleway" fontWeight="Bold" color="#ff0900"></Label>
+                <Label row="0" col="2" text="đ" fontSize="16" textWrap="true" color="#ff0900" class="raleway" paddingTop="6"></Label>
+            </FlexboxLayout>
+            <Label text="Đã bao gồm VAT" textWrap="true" horizontalAlignment="center" class="raleway p-b-10" fontWeight="500" color="#bbb"></Label>
+        </StackLayout>
+        <DockLayout stretchLastChild="true" height="100%">
+            <StackLayout dock="bottom" row="1" id="cartViewBodyBottom" verticalAlignment="center" height="45" backgroundColor="{{ listItemsInCart.length > 0 ? '#FF5722' : '#812092'}}">
+                <Label text="Không có sản phẩm trong giỏ hàng" textWrap="true" class="raleway text-center" color="#ffffff" visibility="{{ !(listItemsInCart.length > 0) ? 'visible' : 'collapsed'}}"
+                    fontSize="18"></Label>
+                <Label text="Đặt hàng" textWrap="true" class="raleway text-center" visibility="{{ ( listItemsInCart.length > 0) ? 'visible' : 'collapsed'}}"
+                    color="white" fontSize="18" touch="{{onCheckOutTouch}}"></Label>
+            </StackLayout>
+            <GridLayout rows="*" verticalAlignment="top">
+                <StackLayout row="0" marginTop="20" marginBottom="20" visibility="{{ (listItemsInCart.length == 0) ? 'visible' : 'collapsed'}}">
+                    <Image stretch="aspectFit" width="150" height="150" src="res://icon_empty_cart"></Image>
+                </StackLayout>
+                <lv:RadListView row="0" dock="top" visibility="{{ (listItemsInCart.length > 0) ? 'visible' : 'collapsed'}}" items="{{ listItemsInCart }}"
+                    id="lv" height="{{listItemsHeight}}" itemSwipeProgressStarted="{{onSwipeCellStarted}}" swipeActions="false"
+                    selectionBehavior="None">
+                    <lv:RadListView.itemTemplate>
+                        <GridLayout rows="*" columns="*" backgroundColor="white">
+                            <GridLayout id="{{id}}" row="0" col="0" rows="auto, auto, auto" columns="*, 3*" style="z-index: 100;border-bottom-width: 1; border-color: #e6e6e6"
+                                class="p-y-5">
+                                <StackLayout row="0" rowSpan="3" col="0" class="p-x-10" width="100" height="100" tap="showProductDetail">
+                                    <i:ImageCacheIt stretch="aspectFit" imageUri="{{productImageList[0] ? productImageList[0] : '' }}" />
+                                </StackLayout>
+                                <GridLayout row="0" col="1" colSpan="2" rows="*" columns="*, auto">
+                                    <Label row="0" col="0" text="{{productName}}" verticalAlignment="center" fontSize="18" textWrap="true" class="raleway m-t-5"
+                                        color="#888"></Label>
+                                    <StackLayout row="0" col="1" width="60" height="40" verticalAlignment="center" horizontalAlignment="center" tap="confirmDeleteItemAndroid">
+                                        <i:ImageCacheIt stretch="fill" resize="300, 300" width="18" height="18" imageUri="res://icon_delete" />
+                                    </StackLayout>
+                                </GridLayout>
+
+                                <StackLayout row="1" col="1" colSpan="2" orientation="horizontal">
+                                    <Label color="#ff0900" class="raleway" textWrap="true">
+                                        <FormattedString>
+                                            <Span text="{{productFinalPriceDisplay ? productFinalPriceDisplay : ' - '}}" fontSize="17" fontWeight="Bold"></Span>
+                                            <Span text="đ" fontSize="15"></Span>
+                                        </FormattedString>
+                                    </Label>
+                                </StackLayout>
+                                <GridLayout row="3" col="1" colSpan="2" rows="*" columns="*, auto">
+                                    <GridLayout row="0" col="0" columns="auto, *, auto" rows="auto" verticalAlignment="bottom" horizontalAlignment="left" width="180">
+                                        <StackLayout col="0" tap="onChangeQuantityTap" typeButton="minius" touch="onChangeQuantityTouch">
+                                            <Image stretch="fill" width="25" height="25" src="res://icon_minus_gray"></Image>
+                                        </StackLayout>
+                                        <GridLayout columns="*" col="1" orientation="horizontal" width="100%" verticalAlignment="center" horizontalAlignment="center">
+                                            <Label col="0" text="{{isFresh ? (quantity * 1000 + 'g') : quantity}}" fontSize="20" textWrap="true" color="#888" class="raleway text-center"
+                                                fontWeight="500"></Label>
+                                        </GridLayout>
+                                        <StackLayout col="2" tap="onChangeQuantityTap" typeButton="plus" touch="onChangeQuantityTouch">
+                                            <Image stretch="fill" width="25" height="25" src="res://icon_plus_gray"></Image>
+                                        </StackLayout>
+                                    </GridLayout>
+                                    <!-- <StackLayout row="0" col="1" class="p-x-20" verticalAlignment="bottom" horizontalAlignment="center" visibility="{{_isFavorite ? 'visible' : 'hidden'}}">
+                                    <Image stretch="fill" width="30" height="30" src="res://icon_favorite"></Image>
+                                </StackLayout> -->
+                                </GridLayout>
+                            </GridLayout>
+                            <GridLayout id="{{id + '_deleteLayout'}}" row="0" col="0" rows="*, auto, *" columns="*, auto, *" backgroundColor="rgba(0,0,0,0.9)"
+                                verticalAlignment="center" visibility="{{ showDeleteLayout ? 'visible' : 'collapsed'}}" style="z-index: 100"
+                                height="125">
+                                <StackLayout row="0" col="0" colSpan="3" tap="cancelDeleteItemAndroid"></StackLayout>
+                                <StackLayout row="2" col="0" colSpan="3" tap="cancelDeleteItemAndroid"></StackLayout>
+                                <StackLayout row="1" col="0" colSpan="3" tap="cancelDeleteItemAndroid"></StackLayout>
+                                <StackLayout row="1" col="2" colSpan="3" tap="cancelDeleteItemAndroid"></StackLayout>
+                                <StackLayout row="1" col="1" width="30" height="30" tap="confirmDeleteItemAndroid" style="z-index: 101" verticalAlignment="center">
+                                    <Image stretch="fill" width="20" height="20" src="res://icon_delete"></Image>
+                                </StackLayout>
+                            </GridLayout>
+                        </GridLayout>
+                    </lv:RadListView.itemTemplate>
+                </lv:RadListView>
+            </GridLayout>
+        </DockLayout>
+    </StackLayout>
+</StackLayout>

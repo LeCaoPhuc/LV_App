@@ -1,0 +1,12 @@
+{
+  "main": "index.js",
+  "name": "nativescript-plugin-native",
+  "nativescript": {
+    "platforms": {
+      "ios": "2.5.0"
+    }
+  },
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "0.0.1"
+}

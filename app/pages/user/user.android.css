@@ -1,0 +1,39 @@
+Page .screen-type {
+    color: #e2e3e9;
+}
+
+.red-dot {
+    background-color: #F44336;
+    margin-top: 5;
+    width: 4;
+    height: 4;
+    border-radius: 2;
+}
+
+.animationShowLong {
+    animation-name: show;
+    animation-duration: 1;
+}
+
+.animationShow {
+    animation-name: show;
+    animation-duration: 0.4;
+}
+
+.animationHide {
+    animation-name: hide;
+    animation-duration: 0.4;
+}
+
+Page .text-error {
+    color: #F44336;
+    text-align: center;
+}
+
+TextField {
+    padding-top: 15;
+    padding-bottom: 15;
+    placeholder-color: #9B9B9B;
+    border-bottom-width: 1;
+    border-color: transparent;
+}

@@ -1,0 +1,52 @@
+<StackLayout backgroundColor="white" class="side-bar">
+    <GridLayout rows="auto" columns="*" width="100%" horizontalAlignment="left" class="profile-layout" tap="{{profileUpdate}}">
+        <Image src="res://header_login" stretch="aspectFill" height="120" width="100%"></Image>
+        <StackLayout orientation="horizontal" height="120">
+            <Image row="0" col="0" src="{{user.image ? user.image : 'res://icon_user'}}" width="80" height="80" class="avatar" horizontalAlignment="left"
+                tap="profileUpdate" />
+            <Label row="1" col="0" text="{{(user.lastName ? user.lastName : '') + ' ' + (user.firstName ? user.firstName : '')}}" color="white" textWrap="true" horizontalAlignment="center"
+                verticalAlignment="center" fontSize="25" class="text-center m-b-5" tap="profileUpdate" />
+        </StackLayout>
+    </GridLayout>
+
+    <ScrollView id="scrollViewSideBar" loaded="onLoaded" backgroundColor="white">
+        <StackLayout>
+            <StackLayout orientation="horizontal" class="side-bar-item" tap="openCheckOrderPage">
+                <Image src="res://icon_check_order" width="30" height="30" marginRight="10"></Image>
+                <Label text="Kiểm tra đơn hàng" tap="" textWrap="true" class="side-bar-label" />
+            </StackLayout>
+            <StackLayout orientation="horizontal" class="side-bar-item" tap="openOrderHistoryPage">
+                <Image src="res://icon_history_order" width="30" height="30" marginRight="10"></Image>
+                <Label text="Lịch sử đơn hàng" tap="" textWrap="true" class="side-bar-label" />
+            </StackLayout>
+            <StackLayout orientation="horizontal" class="side-bar-item" tap="openNotificationPage">
+                <Image src="res://icon_notification" width="30" height="30" marginRight="10"></Image>
+                <Label text="Thông báo" tap="" textWrap="true" class="side-bar-label" />
+            </StackLayout>
+            <StackLayout orientation="horizontal" class="side-bar-item" tap="callCenter">
+                <Image src="res://icon_call" width="30" height="30" marginRight="10"></Image>
+                <Label text="Liên hệ tổng đài" textWrap="true" class="side-bar-label" />
+            </StackLayout>
+            <StackLayout orientation="horizontal" class="side-bar-item" tap="openFAQPage">
+                <Image src="res://icon_faq" width="30" height="30" marginRight="10"></Image>
+                <Label text="Câu hỏi thường gặp" textWrap="true" class="side-bar-label" />
+            </StackLayout>
+            <StackLayout orientation="horizontal" class="side-bar-item" tap="onTapComment">
+                <Image src="res://icon_feedback" width="30" height="30" marginRight="10"></Image>
+                <Label text="Phản hồi ý kiến" textWrap="true" class="side-bar-label" />
+            </StackLayout>
+            <StackLayout orientation="horizontal" class="side-bar-item" tap="openPrivacyPolicyPage">
+                <Image src="res://icon_privacy" width="30" height="30" marginRight="10"></Image>
+                <Label text="Điều khoản và chính sách" textWrap="true" class="side-bar-label" />
+            </StackLayout>
+            <StackLayout orientation="horizontal" class="side-bar-item" tap="openWarehouseInfoPage">
+                <Image src="res://icon_info_warehouse" width="30" height="30" marginRight="10"></Image>
+                <Label text="Thông tin siêu thị" textWrap="true" class="side-bar-label" />
+            </StackLayout>
+            <StackLayout orientation="horizontal" class="side-bar-item" tap="logOut">
+                <Image src="res://icon_signout" width="30" height="30" marginRight="10"></Image>
+                <Label text="Đăng xuất" class="side-bar-label" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>

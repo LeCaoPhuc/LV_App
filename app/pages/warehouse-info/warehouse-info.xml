@@ -1,0 +1,40 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="page" actionBarHidden="true" xmlns:actionBarBack="shared/components/action-bar-back"
+    xmlns:maps="nativescript-google-maps-sdk" loaded='onLoaded' xmlns:Gradient="nativescript-gradient" xmlns:Card="nativescript-cardview">
+    <StackLayout>
+        <actionBarBack:action-bar-back id="actionBar"></actionBarBack:action-bar-back>
+        <StackLayout class="content">
+            <GridLayout rows="*" columns="*" width="100%" height="200" backgroundColor="white">
+                <maps:mapView id="mapView" latitude="{{ warehouseInfo.latitude ? warehouseInfo.latitude : '0' }}" longitude="{{ warehouseInfo.longitude ? warehouseInfo.longitude : '0' }}" bearing="0"  padding="0"
+                    mapReady="{{onMapReady}}" /> 
+            </GridLayout>
+            <ScrollView height="100%">
+                <Gradient:Gradient direction="to top" colors="#ffffff, #ffffff">
+                    <StackLayout backgroundColor="#812092" height="1" width="100%">
+                        
+                    </StackLayout>
+                    <StackLayout height="100%">
+                        <StackLayout orientation="horizontal" class="m-y-20" horizontalAlignment="center">
+                            <Label fontWeight="bold" text="{{ warehouseInfo.warehouseName ? warehouseInfo.warehouseName : '-' }}" textWrap="true" color="#812092" verticalAlignment="bottom" fontSize="25" class="quick-sand"></Label>
+                        </StackLayout>
+                        <StackLayout class="text-center m-t-10">
+                            <Label row="0" col="0" text="&#xf278;" textWrap="true" fontSize="18" class="fa m-b-10" color="#812092"></Label>
+                            <Label row="0" col="1" text="{{ warehouseInfo.address ? warehouseInfo.address : '-' }}" textWrap="true" color="#812092" fontSize="20"></Label>
+                        </StackLayout>
+                        <FlexboxLayout justifyContent="space-around" flexDirection="row" class="m-t-30">
+                            <StackLayout class="text-center">
+                                <Label row="1" col="1" text="{{ warehouseInfo.phone ? warehouseInfo.phone : '-'}}" textWrap="true" color="#812092" fontSize="20" class="m-b-10"></Label>
+                                <Label row="1" col="0" text="&#xf095;" textWrap="true" fontSize="18" class="fa" color="#812092"></Label>
+                            </StackLayout>
+                            <StackLayout class="text-center">
+                                <Label row="2" col="1" text="{{ warehouseInfo.time ? warehouseInfo.time : '-'}}" textWrap="true" color="#812092" fontSize="20" class="m-b-10"></Label>
+                                <Label row="2" col="0" text="&#xf017;" textWrap="true" fontSize="18" class="fa" color="#812092"></Label>
+                            </StackLayout>
+                        </FlexboxLayout>
+                    </StackLayout>
+                </Gradient:Gradient>
+            </ScrollView>
+        </StackLayout>
+
+
+    </StackLayout>
+</Page>

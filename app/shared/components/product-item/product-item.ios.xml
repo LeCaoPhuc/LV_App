@@ -1,0 +1,62 @@
+<GridLayout columns="*,auto" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
+xmlns:i="nativescript-image-cache-it" loaded="onLoaded" totalInfo="{{ _totalInfo }}">    
+    <GridLayout row="1" rowSpan="9" rows="*" columns="*,auto" >   
+        <StackLayout  row="0" colSpan="2" >
+            <i:ImageCacheIt stretch="aspectFit" imageUri="{{ _productImageList[0] ? _productImageList[0] : '~/images/product-mode-1.png'  }}"/>      
+        </StackLayout>
+          <GridLayout rows="20,*,*" height="100%" 
+            style="text-align: center; vertical-align: middle;" 
+            row="0" col="1"> 
+            <StackLayout
+                style="vertical-align: middle" visibility="{{ (!_productIsFresh && _typeOfProduct != 'favorite') && (_quantity != 0)  ? 'visible' : 'collapsed' }}" > 
+                <Label backgroundColor="red"
+                    width="20"
+                    height="20"
+                    borderRadius="10" 
+                     text="{{ _quantity <= 99 ? _quantity : '99+' }}"
+                    style="vertical-align: middle"
+                    fontSize="8" 
+                    color="white" />
+            </StackLayout>
+         </GridLayout> 
+       
+        <Label visibility="{{ _typeOfProduct == 'favorite' ? 'visible' : 'collapse' }}" tap="onTapFavoriteIcon" favoriteId="{{ _productFavoriteId }}" width="30" height="30" text="&#xf004;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+        <Label  visibility="{{ _typeOfProduct != 'favorite' && _productIsFresh ? 'visible' : 'collapse' }}" text="&#xf058;" row="0" col="1" class="fa" color="#EC0677" fontSize="20" style="text-align: center; vertical-align: top;"  textWrap="true" />  
+    </GridLayout>
+ 
+    <GridLayout height="90%" width="100%" rows="*,*" columns="*" row="11" rowSpan="6" visibility="{{ _productFinalPrice != _productOriginalPrice ? 'visible' : 'hidden' }}"  flexDirection="column" justifyContent="center" orientation="vertical" >
+        <StackLayout width="100%" row="0" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center" 
+            class="border-price-layout-one-mode">
+            <StackLayout width="50%" verticalAlignment="middle" >
+                <Label color="white" text="{{ _firstPriceDisplay }}" class="big-price-layout-one-mode"/>
+            </StackLayout>
+            <StackLayout width="50%" orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                <Label color="white" text="{{ _lastPriceDisplay }}"  paddingLeft="3" 
+                 class="small-price-layout-one-mode"/> 
+                <Label color="white" text="đ"  paddingLeft="3" 
+                 class="small-price-layout-one-mode"/>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout width="100%" row="1" orientation="horizontal" horizontalAlignment="center" backgroundColor="#f2f2f2">
+            <Label  text="{{ _productPercentPrice }}" textWrap="true" style=" font-weight:bold"
+             class="raleway percent-price-layout-one-mode"/>
+            <Label text=" đ" textWrap="true"
+            class="raleway percent-price-layout-one-mode"/>
+        </StackLayout>
+    </GridLayout>  
+ 
+    <GridLayout width="100%" rows="*" columns="*" row="11" rowSpan="6" visibility="{{ _productFinalPrice == _productOriginalPrice ? 'visible' : 'hidden' }}"  orientation="vertical" >
+        <StackLayout row="0" width="100%" orientation="horizontal" backgroundColor="#EC0677" color="white" horizontalAlignment="center" 
+            class="border-price-layout-one-mode">
+            <StackLayout verticalAlignment="middle" >
+                <Label  color="white" text="{{ _firstPriceDisplay }}" class="big-price-layout-no-percent-one-mode"/>
+            </StackLayout>
+            <StackLayout  orientation="vertical" verticalAlignment="middle" style="text-align: left">
+                <Label  color="white" text="{{ _lastPriceDisplay }}"  paddingLeft="3" 
+                class="small-price-layout-no-percent-one-mode"/> 
+                <Label  color="white" text="đ"  paddingLeft="3" 
+                class="small-price-layout-no-percent-one-mode"/>
+            </StackLayout>
+        </StackLayout>
+    </GridLayout>    
+</GridLayout>

@@ -1,0 +1,36 @@
+<StackLayout xmlns:Card="nativescript-cardview" loaded="onLoad">
+    <Label text="{{messageError}}" textWrap="true" color="#ffffff" class="text-error"></Label>
+    <Card:CardView elevation="50" radius="40" class="m-x-20" marginTop="10">
+        <GridLayout rows="auto,auto,auto,auto,auto,auto,auto" columns="auto,*,auto" backgroundColor="white" borderRadius="8">
+            <Label row="0" col="0" text="&#xf2c0;" textWrap="true" class="fa m-x-10" color="{{ signInConfig.userName.error ? '#F44336' : '#812092'}}"
+                fontSize="20" verticalAlignment="center" horizontalAlignment="center"></Label>
+
+            <TextField row="0" col="1" text="{{signInConfig.userName.value}}" hint="{{signInConfig.userName.placeHolder}}" id="{{signInConfig.userName.id}}"
+                blur="checkInput" fontSize="18" autocapitalizationType="none"></TextField>
+
+            <Label row="0" col="2" text="&#xf057;" visibility="{{signInConfig.userName.error ? 'visible' : 'collapsed'}}" textWrap="true"
+                class="fa m-x-10" color="#ffffff" fontSize="20" verticalAlignment="center" horizontalAlignment="center"></Label>
+
+            <StackLayout row="1" col="0" colSpan="3" class="hr-light"></StackLayout>
+
+            <Label row="2" col="0" text="&#xf023;" textWrap="true" class="fa m-x-10 p-l-2" color="{{ signInConfig.password.error ? '#F44336' : '#812092'}}"
+                fontSize="20" verticalAlignment="center" horizontalAlignment="center"></Label>
+
+            <TextField row="2" col="1" text="{{ signInConfig.password.value }}" hint="{{signInConfig.password.placeHolder}}" id="{{signInConfig.password.id}}"
+                blur="checkInput" fontSize="18" secure="true"></TextField>
+
+            <Label row="2" col="2" text="&#xf057;" visibility="{{signInConfig.password.error ? 'visible' : 'collapsed'}}" textWrap="true"
+                class="fa m-x-10" color="#ffffff" fontSize="20" verticalAlignment="center" horizontalAlignment="center"></Label>
+
+            <StackLayout row="3" col="0" colSpan="3" class="hr-light"></StackLayout>
+
+            <StackLayout row="4" col="0" colSpan="3" backgroundColor="#ffffff" touch="onSignInTouch">
+                <Label text="Đăng nhập" paddingTop="15" paddingBottom="15" fontSize="18" color="#812092" horizontalAlignment="center"></Label>
+            </StackLayout>
+        </GridLayout>
+    </Card:CardView>
+    <GridLayout rows="*" columns="*">
+        <Button text="Quên mật khẩu?" tap="onForgotPasswordTap" class="m-b-30 p-10" fontSize="18" color="#E0E0E0" borderRadius="8" verticalAlignment="bottom"></Button>
+    </GridLayout>
+
+</StackLayout>

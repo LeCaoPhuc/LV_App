@@ -1,0 +1,28 @@
+.hr {
+    border-top-width: 1;
+    border-color: #ccc;
+}
+
+.input-border {
+    border-bottom-width: 1;
+    border-color: rgb(109, 109, 109);
+    font-size: 17;
+    /* padding-bottom: 0;
+    padding-top: 5; */
+}
+
+.input-border-error {
+    font-size: 17;
+    /* padding-bottom: 0;
+    padding-top: 5; */
+}
+
+Label {
+    vertical-align: center;
+    font-size: 17;
+}
+
+Page .text-error {
+    color: red;
+    font-size: 14
+}

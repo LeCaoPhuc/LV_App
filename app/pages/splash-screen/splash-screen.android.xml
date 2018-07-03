@@ -1,0 +1,25 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd"
+xmlns:i="nativescript-image-cache-it"
+navigatedTo="onNavigatedTo" loaded="onLoaded">
+    <StackLayout style="height: 100%; width: 100%" backgroundColor="white" >
+        <GridLayout rows="*,*,*" columns="*,*" >
+            <StackLayout rowSpan="2" row="0" colSpan="2" tap="test">
+                <i:ImageCacheIt  stretch="fill" style="height: 100%; width: 100%" imageUri="res://header_processbar" />
+            </StackLayout>
+
+            <GridLayout row="2" colSpan="2" rows="*,*,*,*,*" columns="*,*,*,*,*">
+                <StackLayout col="0" colSpan="5">
+                      <Progress id="processBar" value="{{ progressValue }}" marginBottom="-6" marginTop="-6" valueChanged="onValueChanged" verticalAlignment='top'
+                       loaded="onProcessBarLoaded"  color="#ff0000" backgroundColor="#0000ff"
+                      maxValue="{{ progressMaxValue }}" ></Progress>
+                </StackLayout>
+                <StackLayout col="3" row="1">
+                    <i:ImageCacheIt  stretch="fill" style="height: 100%; width: 100%" imageUri="res://coopmart_logo" />
+                </StackLayout>
+                <StackLayout col="1" colSpan="3" row="3" padding="5">
+                    <i:ImageCacheIt  stretch="fill" style="height: 100%; width: 100%" imageUri="res://scanngo" /> 
+                </StackLayout>
+            </GridLayout>
+        </GridLayout>
+    </StackLayout>
+</Page>

@@ -1,0 +1,29 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" xmlns:lv="nativescript-telerik-ui/listview" xmlns:nsDrawer="nativescript-telerik-ui/sidedrawer"
+    xmlns:sideBar="shared/components/side-bar-content" xmlns:actionBar="shared/components/action-bar" xmlns:i="nativescript-image-cache-it"
+    xmlns:category="shared/components/category" xmlns:Card="nativescript-cardview" actionBarHidden="true" navigatingTo="onNavigateTo"
+    loaded="onLoaded" xmlns:x="nativescript-statusbar">
+    <nsDrawer:RadSideDrawer id="sideBar" drawerContentSize="{{screenWidth*0.85}}">
+        <!-- <nsDrawer:RadSideDrawer.drawerTransition>
+            <nsDrawer:PushTransition/>
+        </nsDrawer:RadSideDrawer.drawerTransition> -->
+        <nsDrawer:RadSideDrawer.drawerContent>
+            <sideBar:side-bar-content />
+        </nsDrawer:RadSideDrawer.drawerContent>
+        <nsDrawer:RadSideDrawer.mainContent>
+            <StackLayout orientation="vertical">
+                <x:StatusBar ios:barStyle="light" barColor="#3F4050" />
+                <actionBar:action-bar id="actionBar"></actionBar:action-bar>
+                <StackLayout>
+                    <ListView loaded="onLoadedListView" row="0" class="list-view" id="listView" items="{{ dataItems }}" itemTap="{{ tapCategoryItem }}"
+                        itemLoading="{{ onItemLoading }}">
+                        <ListView.itemTemplate>
+                            <Card:CardView margin="10" elevation="10">
+                                <category:category></category:category>
+                            </Card:CardView>
+                        </ListView.itemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+        </nsDrawer:RadSideDrawer.mainContent>
+    </nsDrawer:RadSideDrawer>
+</Page>

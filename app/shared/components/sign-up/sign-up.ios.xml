@@ -1,0 +1,56 @@
+<StackLayout xmlns:Card="nativescript-cardview" loaded="onLoad">
+    <Label text="{{messageError}}" textWrap="true" class="text-error"></Label>
+    <Card:CardView shadowRadius="5">
+        <GridLayout rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" columns="auto,*,auto" class="m-x-20 p-t-10" marginTop="10"
+            backgroundColor="white" borderRadius="8">
+
+            <Label row="0" col="0" text="&#xf2bd;" textWrap="true" class="fa m-x-10" color="{{signUpConfig.firstName.error ? '#F44336' : '#26A69A'}}"
+                fontSize="20"></Label>
+            <TextField row="0" col="1" text="{{signUpConfig.firstName.value}}" hint="{{signUpConfig.firstName.placeHolder}}" id="{{signUpConfig.firstName.id}}"
+                blur="checkInput" fontSize="18"></TextField>
+            <Label row="0" col="2" text="&#xf057;" visibility="{{signUpConfig.firstName.error ? 'visible' : 'collapsed'}}" textWrap="true"
+                class="fa m-x-10" color="#F44336" fontSize="20"></Label>
+
+            <StackLayout row="1" col="0" colSpan="3" class="hr-light m-y-10"></StackLayout>
+
+            <Label row="2" col="0" text="&#xf2bd;" textWrap="true" class="fa m-x-10" color="{{signUpConfig.lastName.error ? '#F44336' : '#26A69A'}}"
+                fontSize="20"></Label>
+            <TextField row="2" col="1" text="{{signUpConfig.lastName.value}}" hint="{{signUpConfig.lastName.placeHolder}}" id="{{signUpConfig.lastName.id}}"
+                blur="checkInput" fontSize="18"></TextField>
+            <Label row="2" col="2" text="&#xf057;" visibility="{{signUpConfig.lastName.error ? 'visible' : 'collapsed'}}" textWrap="true"
+                class="fa m-x-10" color="#F44336" fontSize="20"></Label>
+
+            <StackLayout row="3" col="0" colSpan="3" class="hr-light m-y-10"></StackLayout>
+
+            <Label row="4" col="0" text="&#xf2c0;" textWrap="true" class="fa m-x-10" color="{{signUpConfig.userName.error ? '#F44336' : '#26A69A'}}"
+                fontSize="20"></Label>
+            <TextField row="4" col="1" text="{{signUpConfig.userName.value}}" hint="{{signUpConfig.userName.placeHolder}}" id="{{signUpConfig.userName.id}}"
+                blur="checkInput" fontSize="18" autocapitalizationType="none"></TextField>
+            <Label row="4" col="2" text="&#xf057;" visibility="{{signUpConfig.userName.error ? 'visible' : 'collapsed'}}" textWrap="true"
+                class="fa m-x-10" color="#F44336" fontSize="20"></Label>
+
+            <StackLayout row="5" col="0" colSpan="3" class="hr-light m-y-10"></StackLayout>
+
+            <Label row="6" col="0" text="&#xf023;" textWrap="true" class="fa m-x-10" color="{{signUpConfig.password.error ? '#F44336' : '#26A69A'}}"
+                fontSize="20"></Label>
+            <TextField row="6" col="1" text="{{signUpConfig.password.value}}" hint="{{signUpConfig.password.placeHolder}}" id="{{signUpConfig.password.id}}"
+                blur="checkInput" fontSize="18" secure="true"></TextField>
+            <Label row="6" col="2" text="&#xf057;" visibility="{{signUpConfig.password.error ? 'visible' : 'collapsed'}}" textWrap="true"
+                class="fa m-x-10" color="#F44336" fontSize="20"></Label>
+
+            <StackLayout row="7" col="0" colSpan="3" class="hr-light m-y-10"></StackLayout>
+
+            <Label row="8" col="0" text="&#xf023;" textWrap="true" class="fa m-x-10" color="{{signUpConfig.rePassword.error ? '#F44336' : '#26A69A'}}"
+                fontSize="20"></Label>
+            <TextField row="8" col="1" text="{{signUpConfig.rePassword.value}}" hint="{{signUpConfig.rePassword.placeHolder}}" id="{{signUpConfig.rePassword.id}}"
+                blur="checkInput" fontSize="18" secure="true"></TextField>
+            <Label row="8" col="2" text="&#xf057;" visibility="{{signUpConfig.rePassword.error ? 'visible' : 'collapsed'}}" textWrap="true"
+                class="fa m-x-10" color="#F44336" fontSize="20"></Label>
+
+            <StackLayout row="9" col="0" colSpan="3" class="hr-light m-t-10"></StackLayout>
+
+            <Button row="10" col="0" colSpan="3" text="Đăng ký" class="btn-active" paddingTop="15" paddingBottom="15" backgroundColor="#4E7CBF"
+                fontSize="18" color="white" tap="signUp"></Button>
+        </GridLayout>
+    </Card:CardView>
+</StackLayout>

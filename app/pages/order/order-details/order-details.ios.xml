@@ -1,0 +1,82 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:cart="shared/components/cart" xmlns:i="nativescript-image-cache-it"
+ xmlns:lv="nativescript-telerik-ui/listview" xmlns:product="shared/components/product-item" navigatingTo="navigatingTo" loaded="onLoaded"
+ class="page" actionBarHidden="true" xmlns:actionBar="shared/components/action-bar-back">
+	<GridLayout id="productListLayout">
+		<DockLayout row="0" stretchLastChild="true" id="sliderView">
+			<StackLayout dock="top">
+				<actionBar:action-bar-back id="actionBar"></actionBar:action-bar-back>
+			</StackLayout>
+			<StackLayout height="75" dock="bottom" visibility="{{ order.orderStatus == 'complete' ? 'visible' : 'collapsed' }}">
+
+			</StackLayout>
+			<StackLayout id="mainLayoutOrderDetail">
+				<StackLayout width="100%" height="150" dock="top">
+					<GridLayout height="130" backgroundImage="res://background_shelf">
+						<Image src="res://shelf" width="100%" height="120" marginTop="5" />
+						<lv:RadListView id="listView" items="{{ orderDetail.items }}" itemLoading="{{ onItemLoading }}" height="130" backgroundColor="rgba(0,0,0,0)">
+							<lv:RadListView.listViewLayout>
+								<lv:ListViewLinearLayout scrollDirection="Horizontal" itemHeight="120" />
+							</lv:RadListView.listViewLayout>
+							<lv:RadListView.itemTemplate>
+								<product:product-item width="{{ itemWidth }}" marginLeft="{{ itemWidth/4 }}" isCheckOrder="{{ isCheckOrder }}" backgroundColor="rgba(0,0,0,0)"
+								 marginTop="10"></product:product-item>
+							</lv:RadListView.itemTemplate>
+						</lv:RadListView>
+					</GridLayout>
+				</StackLayout>
+				<ScrollView>
+					<GridLayout rows="auto,auto,auto,auto,auto,auto,auto,auto" columns="*,auto" class="m-x-20 m-t-10 content">
+						<Label row="0" col="0" text="Tạm tính" textWrap="true" color="#999"></Label>
+						<Label row="0" col="1" textWrap="true" class="text-right" color="#ec0677">
+							<FormattedString>
+								<Span text="{{ orderDetail.subTotalInclTaxDisplay ? orderDetail.subTotalInclTaxDisplay  : '-' }}" fontWeight="Bold" fontSize="20"></Span>
+								<Span text="đ" fontSize="16" fontWeight="400"></Span>
+							</FormattedString>
+						</Label>
+						<Label row="1" col="0" text="Phí giao hàng" textWrap="true" color="#999"></Label>
+						<Label row="1" col="1" textWrap="true" class="text-right" color="#ec0677">
+							<FormattedString>
+								<Span text="{{ orderDetail.shippingFeeDisplay ? orderDetail.shippingFeeDisplay : '-' }}" fontWeight="Bold" fontSize="20"></Span>
+								<Span text="đ" fontSize="16" fontWeight="400"></Span>
+							</FormattedString>
+						</Label>
+						<Label row="2" col="0" text="Giảm giá trên hóa đơn" textWrap="true" color="#999"></Label>
+						<Label row="2" col="1" textWrap="true" class="text-right" color="#ec0677">
+							<FormattedString>
+								<Span text="{{ orderDetail.disCountAmountDisplay ? orderDetail.disCountAmountDisplay : '-' }}" fontWeight="Bold" fontSize="20"></Span>
+								<Span text="đ" fontSize="16" fontWeight="400"></Span>
+							</FormattedString>
+						</Label>
+						<Label row="3" col="0" text="Giảm giá trên voucher" textWrap="true" marginTop="30" color="#999"></Label>
+						<Label row="3" col="1" textWrap="true" class="text-right" color="#ec0677" marginTop="30">
+							<FormattedString>
+								<Span text="{{ orderDetail.couponDiscountDisplay ? orderDetail.couponDiscountDisplay : '-' }}" fontWeight="Bold" fontSize="20"></Span>
+								<Span text="{{ orderDetail.couponType == 'by_percent' ? '%' : ( orderDetail.couponType == 'by_fixed' ? 'đ' : '') }}" fontSize="16"
+								 fontWeight="400"></Span>
+							</FormattedString>
+						</Label>
+
+						<Label row="4" col="0" text="Thành tiền" textWrap="true" marginTop="30" color="#015eaa"></Label>
+						<Label row="4" col="1" textWrap="true" class="text-right" color="#ec0677" marginTop="30">
+							<FormattedString>
+								<Span text="{{ orderDetail.totalMoneyDisplay ? orderDetail.totalMoneyDisplay : '-' }}" fontWeight="Bold" fontSize="20"></Span>
+								<Span text="đ" fontSize="16" fontWeight="400"></Span>
+							</FormattedString>
+						</Label>
+						<Label row="5" col="1" text="Đã bao gồm VAT" textWrap="true" class="text-right" fontSize="15" color="#999" marginTop="3"></Label>
+						<Label row="6" col="1" text="{{ orderDetail.status ? orderDetail.status : '' }}" textWrap="true" class="text-right" fontSize="15"
+						 color="#ec0677"></Label>
+						<Button row="7" col="0" text="Đặt lại toàn bộ đơn hàng" tap="{{ onTapReOrder }}" visibility="{{ order.orderStatus == 'complete' ? 'visible' : 'collapsed' }}"
+						 colSpan="2" color="white" fontSize="15" borderRadius="5" width="200" height="40" marginTop="10" horizontalAlignment="right"
+						 backgroundColor="#005DAB" />
+					</GridLayout>
+				</ScrollView>
+			</StackLayout>
+		</DockLayout>
+		<cart:cart row="0" id="cart" showBtnGroup="false" showBtnScan="false" visibility="collapsed" style="z-index: 0"></cart:cart>
+		<StackLayout id="confirmAddProductToCart" height="75" style="width: 20%" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0)"
+		 visibility="collapse" marginBottom="40" style="z-index: 2">
+			<Image row="0" col="2" stretch="aspectFit" src="res://icon_confirm" />
+		</StackLayout>
+	</GridLayout>
+</Page>

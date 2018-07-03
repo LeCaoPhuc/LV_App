@@ -1,0 +1,8 @@
+<StackLayout xmlns:i="nativescript-image-cache-it"  
+col="{{ styleFormat.style.col }}" 
+row="{{ styleFormat.style.row }}"
+margin="{{ styleFormat.style.margin }}" tap="{{ onTapImageDepartment }}" listProduct="{{ departmentItemListProduct }}" mode="{{ styleFormat.mode }}" loaded="onLoaded">
+      <i:ImageCacheIt width="100%" height="100%" stretch="fill" imageUri="http://conbaoso.com/images/material_gray.jpg"></i:ImageCacheIt>  
+      <Label text="{{ departmentItemImage }}" color="white" visibility="collapsed" textWrap="true" />
+      
+</StackLayout>

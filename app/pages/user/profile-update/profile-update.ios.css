@@ -1,0 +1,21 @@
+.hr {
+    border-top-width: 1;
+    border-color: #ccc;
+}
+
+.input-border {
+    border-bottom-width: 1;
+    border-color: #ccc;
+    padding-bottom: 5;
+    padding-top: 5;
+}
+
+.input-border-error {
+    padding-bottom: 5;
+    padding-top: 5;
+}
+
+Page .text-error {
+    color: red;
+    font-size: 14
+}

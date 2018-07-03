@@ -1,0 +1,12 @@
+<GridLayout rows="*,*,*,*,*,*,*,*,*,*,*,*,*" columns="*" loaded="onLoaded"  indexOfView="{{ indexOfView }}"
+xmlns:shelf="shared/components/shelf" >    
+    <StackLayout row="1" rowSpan="3" visibility="{{ listShelfOnDepartmentStore.length ==3 || listShelfOnDepartmentStore.length == 2 ? 'visible' : 'collapsed' }}">
+        <shelf:shelf  id="firstShelf"></shelf:shelf>
+    </StackLayout>
+    <StackLayout  row="5" rowSpan="3" visibility="{{ listShelfOnDepartmentStore.length ==3 || listShelfOnDepartmentStore.length == 2 || listShelfOnDepartmentStore.length == 1 ? 'visible' : 'collapsed' }}">
+        <shelf:shelf id="secondShelf"></shelf:shelf>
+    </StackLayout>
+    <StackLayout  row="9" rowSpan="3" visibility="{{ listShelfOnDepartmentStore.length ==3 ? 'visible' : 'collapsed' }}">
+            <shelf:shelf id="thirdShelf"></shelf:shelf> 
+    </StackLayout>  
+</GridLayout>

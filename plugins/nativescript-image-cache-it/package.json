@@ -1,0 +1,35 @@
+{
+  "dependencies": {},
+  "description": "Image caching plugin for nativescript",
+  "devDependencies": {
+    "tns-core-modules": "^3.0.0",
+    "tns-platform-declarations": "^3.0.0",
+    "typescript": "^2.2.0"
+  },
+  "license": "MIT",
+  "main": "image-cache-it",
+  "name": "nativescript-image-cache-it",
+  "nativescript": {
+    "platforms": {
+      "android": "3.0.0",
+      "ios": "3.0.0"
+    }
+  },
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "tns-core-modules": "^3.0.0"
+  },
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/triniwiz/nativescript-image-cache-it.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "demo.android": "npm run preparedemo ; cd demo ; tns run android",
+    "demo.ios": "npm run preparedemo ; cd demo ; tns emulate ios",
+    "preparedemo": "npm run build ; cd demo ; tns plugin remove nativescript-image-cache-it ; tns plugin add .. ; tns install",
+    "setup": "cd demo ; npm install ; cd .. ; npm run build ; cd demo ; tns plugin add .. ; cd .."
+  },
+  "version": "2.0.3"
+}

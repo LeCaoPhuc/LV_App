@@ -1,0 +1,62 @@
+﻿@import 'nativescript-theme-core/css/core.light.css'; 
+@import './custom.css'; 
+@import './animation.css'; 
+
+.fa {
+    font-family: 'fontawesome-webfont','FontAwesome';
+}
+.quick-sand{
+    font-family: 'quicksand-regular','Quicksand';
+}
+
+.raleway {
+    font-family: 'Raleway-Regular', 'Raleway';
+}
+
+Label, TextField, TextView, Button {
+    font-family: 'Raleway-Regular', 'Raleway';
+}
+
+Button {
+    font-size: 18;
+}
+
+.action-bar{
+    padding: 10;
+    /* background-color: #3F4050; */
+     background-color: #812092; 
+}
+
+.action-bar > Label {
+    font-size: 24;
+}
+
+Page .text-link {
+    font-size: 16;
+    color: #0f8be2;
+}
+
+.title{
+    font-size: 23;
+    text-align: center;
+}
+
+Page .text-label{
+    font-size: 16;
+}
+
+.avatar {
+    border-width: 2px;
+    border-color: #ccc;
+    border-radius: 100;
+}
+
+.input-border-error{
+    border-bottom-width: 1;
+    border-color: red;
+}
+
+.disable{
+    color: #808080;
+}
+

@@ -1,0 +1,15 @@
+<GridLayout  rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
+xmlns:product="shared/components/product-item"
+xmlns:i="nativescript-image-cache-it" 
+loaded="onLoaded">
+   <i:ImageCacheIt  row="7" rowSpan="4" colSpan="16" col="0"  imageUri="res://shelf"></i:ImageCacheIt> 
+     <StackLayout  row="0" rowSpan="16" col="1" colSpan="4" visibility="{{ productListLength ==3 || productListLength == 2   ? 'visible' : 'collapsed' }}"  >
+         <product:product-item id="firstProduct" ></product:product-item>
+     </StackLayout>
+     <StackLayout row="0" col="6" rowSpan="16" colSpan="4" visibility="{{ productListLength ==3 || productListLength == 2 || productListLength == 1 ? 'visible' : 'collapsed' }}">
+         <product:product-item id="secondProduct" ></product:product-item>
+     </StackLayout>
+     <StackLayout  row="0" col="11" rowSpan="16" colSpan="4" visibility="{{ productListLength ==3  ? 'visible' : 'collapsed' }}" >
+          <product:product-item id="thirdProduct" ></product:product-item>  
+     </StackLayout>  
+</GridLayout>

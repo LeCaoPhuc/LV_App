@@ -1,0 +1,7 @@
+<GridLayout rows="*,60" columns="*" width="{{ width }}" height="{{ height }}"
+xmlns:i="nativescript-image-cache-it" categoryId="{{ categoryId }}" categoryName="{{ categoryName }}"  categoryImage="{{ categoryImage ? categoryImage : 'res://faild' }}">
+    <i:ImageCacheIt row="0" rowSpan="2" col="0"  stretch="fill" imageUri=" {{ categoryImage ? categoryImage : 'res://faild' }}" />
+    <StackLayout backgroundColor="rgba(0,0,0,0.5)" height="60" col="0" row="1" style="vertical-align: middle">
+        <Label text=" {{ categoryName }}" color="white" textWrap="true" style="text-align: center;"/>
+    </StackLayout>
+</GridLayout>

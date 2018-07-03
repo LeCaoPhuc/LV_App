@@ -1,0 +1,34 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="page" navigatingTo="navigatingTo"
+    loaded="{{pageLoaded}}" xmlns:signIn="shared/components/sign-in" xmlns:signUp="shared/components/sign-up" isSignIn="true"
+    xmlns:Gradient="nativescript-gradient" actionBarHidden="true" >
+    <!-- <ActionBar title="" icon="" class="action-bar" backgroundColor="#3F4050" color="white" flat="true">
+    </ActionBar> -->
+    <StackLayout>
+        <Gradient:Gradient height="100%" direction="to bottom" colors="#812092, #b92ed1">
+            <StackLayout class="animationShowLong" marginTop="20">
+                <FlexboxLayout flexDirection="row" justifyContent="center">
+                    <!-- <Image src="res://logo_scan" width="120" height="120"></Image> -->
+                    <Label text="HandMade" textWrap="true" class="quick-sand" color="#e2e3e9" fontSize="35" tap="{{changeIpServer}}"></Label>
+                </FlexboxLayout>
+                <StackLayout class="p-x-20" marginTop="35">
+                    <FlexboxLayout flexDirection="row" justifyContent="space-around" marginBottom="20">
+                        <StackLayout class="text-center" tap="{{onChangeViewTap}}" viewType="signin">
+                            <Label text="Đăng Nhập" textWrap="true" class="screen-type" opacity="{{(showScreenTabView == 'signin') ? 1 : 0.4}}"></Label>
+                            <StackLayout visibility="{{(showScreenTabView == 'signin') ? 'visible' : 'collapsed'}}" class="red-dot"></StackLayout>
+                        </StackLayout>
+                        <StackLayout class="text-center" tap="{{onChangeViewTap}}" viewType="signup">
+                            <Label text="Đăng Ký" textWrap="true" class="screen-type" opacity="{{(showScreenTabView == 'signup') ? 1 : 0.4}}"></Label>
+                            <StackLayout visibility="{{(showScreenTabView == 'signup') ? 'visible' : 'collapsed'}}" class="red-dot"></StackLayout>
+                        </StackLayout>
+                    </FlexboxLayout>
+                    <StackLayout id="signInView" visibility="{{(showScreen == 'signin') ? 'visible' : 'collapsed'}}">
+                        <signIn:sign-in/>
+                    </StackLayout>
+                    <StackLayout id="signUpView" visibility="{{(showScreen == 'signup') ? 'visible' : 'collapsed'}}">
+                        <signUp:sign-up/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </Gradient:Gradient>
+    </StackLayout>
+</Page>
